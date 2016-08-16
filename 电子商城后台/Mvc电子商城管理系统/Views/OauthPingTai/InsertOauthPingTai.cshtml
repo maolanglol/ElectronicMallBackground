@@ -1,0 +1,140 @@
+﻿ <!DOCTYPE html>
+<html><head>
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    </head>
+     <script type="text/javascript">
+         $(document).ready(function () {
+             //            $('#txtFuJiID').attr('value', @Session["商品类别ID"]);
+             cboHuiYuanDengJiBindingdata();
+             cboHuiYuanZhuangTaiiBindingdata();
+             $('#wOauthPingTai').window({//窗口初始化 
+                 //重要的部分 
+                 onBeforeClose: function () {
+                     //当面板关闭之前触发的事件 
+                     var GuanBi = ShiFouGuanBi();
+                     if (GuanBi != true)
+                         return false;
+                 }
+
+             });
+             $('#wOauthPingTai').window('open');
+
+
+             //查询仓库信息
+             $.getJSON("/ChanPinZiLiao/ChaXunCangKu",
+              function (data) {
+                  $('#cboCangKu').combobox({ data: data, valueField: 'id',
+                      textField: 'text'
+                  });
+              }
+           );
+             $.getJSON("/ChanPinZiLiao/ChaXunChangShang",
+              function (data) {
+                  $('#cboChangShang').combobox({ data: data, valueField: 'id',
+                      textField: 'text'
+                  });
+              }
+           );
+
+             $.getJSON("/ChanPinZiLiao/ChaXunWuLiaoLeiXing",
+              function (data) {
+                  $('#cboSuoShuLeiXing').combotree("loadData", data);
+              }
+             );
+         });
+         //判断是否关闭窗体
+
+         function ShiFouGuanBi() {
+             if (confirm('窗口正在关闭，请确认您当前的操作已保存。\n 是否继续关闭窗口？')) {
+                 $('#wOauthPingTai').window('close', true); //这里调用close 方法，true 表示面板被关闭的时候忽略onBeforeClose 回调函数。 
+                 window.location.href = "/HuiYuanXinXi/HuiYuanXinXi";
+             } else
+                 return false;
+         }
+         //下拉框属性数据绑定
+         function cboHuiYuanDengJiBindingdata() {
+
+             $.getJSON("/HuiYuanXinXi/ChaXunHuiYuanDengJi",
+              function (data) {
+                  $('#cboHuiYuanDengJi').combobox({ data: data, valueField: '会员等级ID',
+                      textField: '会员等级'
+                  });
+
+              });
+         }
+         //下拉框属性数据绑定
+         function cboHuiYuanZhuangTaiiBindingdata() {
+
+             $.getJSON("/HuiYuanXinXi/ChaXunHuiYuanZhuangTai",
+              function (data) {
+                  $('#cboHuiYuanZhuangTai').combobox({ data: data, valueField: '会员状态ID',
+                      textField: '会员状态'
+                  });
+
+              });
+         }
+         function TianJia() {
+             if (confirm('是否添加？')) {
+                 var dazhe = true;
+                 var n = $("input:checked").length;
+                 if (n == 0) {
+                     dazhe = false;
+                 }
+              $.getJSON("/OauthPingTai/TianJiaOauthPingTai?strBiaoTi="+$('#txtBiaoTi').val() + "&"
+                                       
+                                        + "strMuLuMingCheng=" + $('#txtMuLuMingCheng').val() + "&"
+                                        + "strMiaoShu=" + $('#txtMiaoShu').val() + "&"
+                                        + "strZhuangTai=" + $('#txtZhuangTai').val() + "&",
+
+                function (data) {
+                    if (data != null) {
+                        alert("添加成功");
+                        window.location.href = "/OauthPingTai/OauthPingTai";
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+
+                });
+             }
+         }
+       </script>
+<body>
+  <div id="wOauthPingTai" class="easyui-window" title="新增OauthPingTai"  data-options="modal:true,closed:true,iconCls:'icon-产品资料'" style="width:480px;height:280px;padding:10px;  top: 30px; left:300px;">
+	<table>
+      <tr>
+                      <td align="right">标题：</td><td colspan=3><input id="txtBiaoTi" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                      <td align="right">目录名称：</td><td colspan=3><input id="txtMuLuMingCheng" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                       <td align="right">描述：</td><td colspan=3> <input id="txtMiaoShu" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                      <td align="right">状态：</td><td colspan=3> <input id="txtZhuangTai" class="submit" style="width:335px"></input></td>
+                    </tr>
+
+
+                    <tr>
+               <td style ="height : 50px" colspan=4 align="center">
+                
+               <a  id="btnTianJia" onclick="TianJia()" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">添加</a>
+
+
+               <a onclick="ShiFouGuanBi()" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出</a>
+             
+             </td>
+            
+            </tr>
+
+        </table>
+  </div>
+    </body>
+    </html>

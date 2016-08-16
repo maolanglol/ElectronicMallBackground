@@ -1,0 +1,94 @@
+﻿ <!DOCTYPE html>
+<html><head>
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    </head>
+     <script type="text/javascript">
+         $(document).ready(function () {
+           $.getJSON("/ChanPinLeiBie/ChaXunWuLiaoLeiXing",
+              function (data) {
+                  $('#cboSuoShuLeiXing').combotree("loadData", data);
+              }
+             );
+              $('#cboSuoShuLeiXing').combotree('setValue',@Session["商品类别ID"]);
+//            $('#txtFuJiID').attr('value', @Session["商品类别ID"]);
+             $('#w商品类别').window({//窗口初始化 
+                 //重要的部分 
+                 onBeforeClose: function () {
+                     //当面板关闭之前触发的事件 
+                     var GuanBi = ShiFouGuanBi();
+                     if (GuanBi != true)
+                         return false;
+                 }
+             });
+               $('#w商品类别').window('open');
+            
+         });
+         //判断是否关闭窗体
+
+         function ShiFouGuanBi() {
+             if (confirm('窗口正在关闭，请确认您当前的操作已保存。\n 是否继续关闭窗口？')) {
+                 $('#w商品类别').window('close', true); //这里调用close 方法，true 表示面板被关闭的时候忽略onBeforeClose 回调函数。 
+                 window.location.href = "/ChanPinLeiBie/ChanPinLeiBie";
+             } else
+                 return false;
+         }
+      
+         function TianJia() {
+             if (confirm('是否添加？')) {
+                 var dazhe = true;
+                 var n = $("input:checked").length;
+                 if (n == 0) {
+                     dazhe = false;
+                 }   
+                 $.getJSON("/ChanPinLeiBie/TianJiaWuLiaoLeiBie?父级ID=" +  $('#cboSuoShuLeiXing').combotree('getValue') + "&"
+                                        + "类别名称=" + $('#txtLeiBieMingCheng').val() + "&"
+                                        + "调用别名=" + $('#txtDiaoYongBieMing').val() + "&",
+                function (data) {
+                    if (data != null) {
+                        alert("添加成功");
+                        window.location.href = "/ChanPinLeiBie/ChanPinLeiBie";
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+
+                });
+             }
+         }
+       </script>
+<body>
+  <div id="w商品类别" class="easyui-window" title="新增产品资料"  data-options="modal:true,closed:true,iconCls:'icon-产品资料'" style="width:480px;height:210px;padding:10px;  top: 30px; left:300px;">
+	<table>
+            <tr>
+                <td align="right">编号：</td><td> <input id="txtBianHao" readonly="readonly"  style="width:130px"></input></td>
+                <td align="right">调用别名：</td><td> <input id="txtDiaoYongBieMing"  style="width:130px"></input></td> 
+            </tr>
+            <tr>
+             <td align="right">类别名称：</td><td colspan=3><input id="txtLeiBieMingCheng" class="submit" style="width:335px"></input></td>
+            </tr>
+            <tr>
+             <td align="right">所属类型：</td><td><input id="cboSuoShuLeiXing" class="easyui-combotree" style="width:135px"></input></td>
+            </tr>
+           
+              <tr>
+               <td style ="height : 50px" colspan=4 align="center">
+                
+               <a  id="btnTianJia" onclick="TianJia()" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">添加</a>
+
+
+               <a onclick="ShiFouGuanBi()" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出</a>
+             
+             </td>
+            
+            </tr>
+
+        </table>
+  </div>
+    </body>
+    </html>

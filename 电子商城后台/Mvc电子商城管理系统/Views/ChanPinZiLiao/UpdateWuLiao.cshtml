@@ -1,0 +1,254 @@
+﻿
+
+ <!DOCTYPE html>
+<html><head>
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    </head>
+     <script type="text/javascript">
+   var  BangDing=0;
+         $(document).ready(function () {
+             $('#w产品资料').window({//窗口初始化 
+                 //重要的部分 
+                 onBeforeClose: function () {
+                     //当面板关闭之前触发的事件 
+                     var GuanBi = ShiFouGuanBi();
+                     if (GuanBi != true)
+                         return false;
+
+                 }
+             });
+             
+             //查询单位信息
+             cboBindingdata("#cboDanWei", 2);
+             //查询颜色信息
+             cboBindingdata("#cboYanSe", 1);
+          
+             //             $("#chkDaZhe").attr("checked", true);
+             //                     $('#txtBianHao').attr('value', '123');
+             //查询仓库信息
+          
+             $.getJSON("/ChanPinZiLiao/ChaXunCangKu",
+                      function (data) {
+                          $('#cboCangKu').combobox({ data: data, valueField: 'id',
+                              textField: 'text'
+                              
+                          });
+                              BangDing++;
+                      }
+                   );
+             $.getJSON("/ChanPinZiLiao/ChaXunChangShang",
+                      function (data) {
+                          $('#cboChangShang').combobox({ data: data, valueField: 'id',
+                              textField: 'text'
+                               
+                          });
+                              BangDing++;
+                      }
+                   );
+     
+             $.getJSON("/ChanPinZiLiao/ChaXunWuLiaoLeiXing",
+                      function (data) {
+                          $('#cboSuoShuLeiXing').combotree("loadData", data);
+                         BangDing++;
+                      }
+                     );
+                    
+                   
+                  //显示窗体
+                  start();
+                 $('#w产品资料').window('open');
+                     
+            
+         });
+
+
+
+          function start() {
+
+	        $('#wstart').window('open');
+	        var value = $('#p').progressbar('getValue');
+	        if (value < 100) {
+
+	         value= BangDing*20;
+	            $('#p').progressbar('setValue', value);
+	            setTimeout(arguments.callee, 200);
+	        }
+	        else {
+	            $('#p').progressbar('setValue', 0);
+                BindingWuLiao();
+	            $('#wstart').window('close');
+                BangDing=0;
+	        }
+	    };
+
+          //让所有下拉框数据绑定完再绑定商品信息
+
+
+        function BindingWuLiao() {
+//             setTimeout(function () {   
+                                   $.getJSON("/ChanPinZiLiao/ChanXunWuLiao?商品ID="+ @Session["商品ID"],
+                                              function (data) {
+                                                                $('#txtBianHao').attr('value', data[0].商品编码);
+                                                                $('#txtChanPinMingCheng').attr('value', data[0].商品名称);
+                                                                $('#txtPinYinMa').attr('value', data[0].助记码);
+                                                                $('#txtTiaoXingMa').attr('value', data[0].条形码);
+                                                                $('#txtGuiGe').attr('value', data[0].规格);
+                                                                $('#txtChuWei').attr('value', data[0].默认储位);
+                                                                $('#txtYuSheJinJia').numberbox('setValue', data[0].预设进价);
+                                                                $('#txtVIPJiaGe').numberbox('setValue', data[0].VIP价格);
+                                                                $('#txtHuiYuanJiaGe').numberbox('setValue', data[0].会员价格);
+                                                                $('#txtLingShouJiaGe').numberbox('setValue', data[0].零售价);
+                                                                $('#txtPiFaJiaGe').numberbox('setValue', data[0].成本价格);
+                                                                $('#txtBeiZhu').attr('value', data[0].备注);
+                                                                $('#txtJiBenZhongLiang').numberbox('setValue', data[0].基本重量);       
+                                                                $('#cboSuoShuLeiXing').combotree('setValue', data[0].商品类别PubID);
+                                                                $('#cboChangShang').combobox('setValue', data[0].生产商ID);
+                                                                $('#chkDaZhe').attr('checked', data[0].打折否);
+                                                                $('#cboYanSe').combobox('setValue', data[0].颜色PubID);
+                                                                $('#cboCangKu').combobox('setValue', data[0].仓库ID);
+                                                                $('#cboChangShang').combobox('setValue', data[0].生产商ID);
+                                                                $('#cboDanWei').combobox('setValue', data[0].计量单位PubID);
+                                                    BangDing++;
+                                              }
+                                   );
+//                  }, 2000);    
+         }
+         
+         //判断是否关闭窗体
+
+         function ShiFouGuanBi() {
+             if (confirm('窗口正在关闭，请确认您当前的操作已保存。\n 是否继续关闭窗口？')) {
+                 $('#w产品资料').window('close', true); //这里调用close 方法，true 表示面板被关闭的时候忽略onBeforeClose 回调函数。 
+                 window.location.href = "../ChanPinZiLiao/ChanPinZiLiao";
+             } else
+                 return false;
+         }
+         //下拉框属性数据绑定
+         function cboBindingdata(YuanSuMing, ShuXingJiHeID) {
+
+             $.getJSON("/ChanPinZiLiao/ChaXunShuXing?ShuXingJiHeID=" + ShuXingJiHeID,
+              function (data) {
+                  $(YuanSuMing).combobox({ data: data, valueField: 'id',
+                      textField: 'text'
+                  });
+                    BangDing++;
+              });
+         }
+
+         function XiuGai() {
+         if (confirm('是否修改？')) {
+             var dazhe = true;
+             var n = $("input:checked").length;
+             if (n == 0) {
+                 dazhe = false;
+             }
+             $.getJSON("/ChanPinZiLiao/XiuGaiWuLiao?商品编码=" + $('#txtBianHao').val() + "&"
+                                        + "商品名称=" + $('#txtChanPinMingCheng').val() + "&"
+                                        + "商品类别PubID=" + $('#cboSuoShuLeiXing').combotree('getValue') + "&"
+                                        + "助记码=" + $('#txtPinYinMa').val() + "&"
+                                        + "条形码=" + $('#txtTiaoXingMa').val() + "&"
+                                        + "生产商ID=" + $('#cboChangShang').combobox('getValue') + "&"
+                                        + "计量单位PubID=" + $('#cboDanWei').combobox('getValue') + "&"
+                                        + "规格=" + $('#txtGuiGe').val() + "&"
+                                        + "颜色PubID=" + $('#cboYanSe').combobox('getValue') + "&"
+                                        + "默认仓库ID=" + $('#cboCangKu').combobox('getValue') + "&"
+                                        + "默认储位=" + $('#txtChuWei').val() + "&"
+                                        + "打折否=" + dazhe + "&"
+                                        + "预设进价=" + $('#txtYuSheJinJia').val() + "&"
+                                        + "VIP价格=" + $('#txtVIPJiaGe').val() + "&"
+                                        + "会员价格=" + $('#txtHuiYuanJiaGe').val() + "&"
+                                        + "限售建议价格=" + $('#txtLingShouJiaGe').val() + "&"
+                                        + "备注=" + $('#txtBeiZhu').val() + "&"
+                                        + "限售建议价格=" + $('#txtLingShouJiaGe').val() + "&",
+                function (data) {
+                    if (data != null) {
+                        alert("修改成功");
+                        window.location.href = "/ChanPinZiLiao/ChanPinZiLiao";
+                    }
+
+                });
+            }
+            return false;
+         }
+
+       </script>
+<body>
+  <div id="w产品资料" class="easyui-window" title="修改产品资料"  data-options="modal:true, iconCls:'icon-产品资料'"style="width:500px;height:420px;padding:10px;  top: 30px; left:300px;">
+	<table>
+            <tr>
+                <td align="right">产品编号：</td><td> <input id="txtBianHao" class="submit" style="width:130px"></input></td>
+                <td align="right">拼音码：</td><td> <input id="txtPinYinMa" class="submit" style="width:130px"></input></td> 
+            </tr>
+            <tr>
+             <td align="right">产品名称：</td><td colspan=3><input id="txtChanPinMingCheng" class="submit" style="width:335px"></input></td>
+            </tr>
+            <tr>
+             <td align="right">规格：</td><td colspan=3> <input id="txtGuiGe" class="submit" style="width:335px"></input></td>
+            </tr>
+             <tr>
+                <td align="right">默认仓库：</td><td><input id="cboCangKu" class="easyui-combobox" name="state" style="width:135px;"></input></td>
+               <td align="right">储位：</td><td><input id="txtChuWei" class="submit" style="width:130px"></input></td>
+                </td>
+            </tr>
+             <tr>
+                <td align="right">单位：</td><td><select id="cboDanWei" class="easyui-combobox" name="state" style="width:135px;"></select></td>
+               <td align="right">产条形码：</td><td><input id="txtTiaoXingMa" class="submit" style="width:130px"></input></td>
+                </td>
+            </tr>
+             <tr>
+                <td align="right">颜色：</td><td><select id="cboYanSe" class="easyui-combobox" name="state" style="width:135px;"></select></td>
+               <td align="right">所属类型：</td><td><input id="cboSuoShuLeiXing" class="easyui-combotree" style="width:135px"></input></td>
+                </td>
+            </tr>
+             <tr>
+                <td align="right">生产厂商：</td><td><input id="cboChangShang" class="easyui-combobox"   style="width:135px;"></input></td>
+               <td align="right">基本重量：</td><td><input id="txtJiBenZhongLiang"  class="easyui-numberbox" style="width:130px" value="0.00"></input></td>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">预设进价：</td><td><input id="txtYuSheJinJia" class="easyui-numberbox"   style="width:130px;" value="0.00"></input></td>
+               <td align="right">是否打折：</td><td> <input id="chkDaZhe" type="checkbox" name="test" ></input></td>
+                </td>
+            </tr>
+             <tr>
+                <td align="right">批发价格：</td><td><input id="txtPiFaJiaGe" class="easyui-numberbox"   style="width:130px;" value="0.00"></input></td>
+               <td align="right">零售价格：</td><td><input id="txtLingShouJiaGe" class="easyui-numberbox" style="width:130px" value="0.00"></input></td>
+                </td>
+            </tr>
+             <tr>
+                <td align="right">VIP价格：</td><td><input id="txtVIPJiaGe" class="easyui-numberbox"   style="width:130px;" value="0.00"></input></td>
+               <td align="right">会员价格：</td><td><input id="txtHuiYuanJiaGe" class="easyui-numberbox" style="width:130px" value="0.00"></input></td>
+                </td>
+            </tr>
+             <tr>
+            
+             <td align="right">备注：</td><td colspan=3><input id="txtBeiZhu" class="submit" style="width:335px"></input></td>
+            
+            </tr>
+              <tr>
+               <td style ="height : 50px" colspan=4 align="center">
+                
+               <a onclick="XiuGai()" class="easyui-linkbutton" data-options="iconCls:'icon-修改'">修改</a>
+
+               <a onclick="ShiFouGuanBi()" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出</a>
+             
+             </td>
+            
+            </tr>
+
+        </table>
+        <!--窗体加载数据期间显示的进度条-->
+        <div id="wstart" class="easyui-window" title="数据加载中"  data-options="modal:true,iconCls:'icon-产品资料'" style="width:440px;height:100px;padding:10px;  top: 150px; left:300px;">
+
+        <div id="p" disable='disable'  class="easyui-progressbar" style="width:400px;"></div>
+	
+       </div>
+  </div>
+    </body>
+    </html>

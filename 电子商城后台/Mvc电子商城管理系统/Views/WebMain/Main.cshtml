@@ -1,0 +1,175 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head> 
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+
+   </head>
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+
+       function ChanPinZiLiao() {
+           $('#f网页区').attr("src", "../ChanPinZiLiao/ChanPinZiLiao");
+       }
+       function ChanPinLeiBie() {
+           $('#f网页区').attr("src", "../ChanPinLeiBie/ChanPinLeiBie");
+       }
+       function HuiYuanXinXi() {
+           $('#f网页区').attr("src", "../HuiYuanXinXi/HuiYuanXinXi");
+       }
+       function HuiYuanZuBie() {
+           $('#f网页区').attr("src", "../HuiYuanZuBie/HuiYuanZuBie");
+       }
+       function HuiYuanDuanXin() {
+           $('#f网页区').attr("src", "../HuiYuanDuanXin/HuiYuanDuanXin");
+       }
+       function HuiYuanXiaoFei() {
+           $('#f网页区').attr("src", "../HuiYuanXiaoFei/HuiYuanXiaoFei");
+       }
+       function HuiYuanJiFen() {
+           $('#f网页区').attr("src", "../HuiYuanJiFen/HuiYuanJiFen");
+       }
+       function YouJianMuBan() {
+           $('#f网页区').attr("src", "../YouJianMuBan/YouJianMuBan");
+       }
+       function OauthPingTai() {
+           $('#f网页区').attr("src", "../OauthPingTai/OauthPingTai");
+       }
+       function PeiSongFangShi() {
+           $('#f网页区').attr("src", "../PeiSongFangShi/PeiSongFangShi");
+       }
+       function ZhiFuFangShi() {
+           $('#f网页区').attr("src", "../ZhiFuFangShi/ZhiFuFangShi");
+       }
+       function DingDanLieBiao() {
+           $('#f网页区').attr("src", "../DingDanLieBiao/DingDanLieBiao");
+       }
+         </script>
+<body>
+   @*=主界面标题四大区域之一*@
+	<div style="background:url('../../Content/图片/我的界面3.png'); width:1200px;height:70px;">
+    <span style="float: right;margin-top: 30px;margin-right: 20px;font-size: 15px;">管理员，欢迎您！&nbsp;&nbsp;安全退出</span>
+    </div>
+  
+@*=上菜单设计四大区域之二###############################################################################*@
+  <div>
+    <a  class="easyui-linkbutton"   style="width:200px;" data-options="plain:true">操作菜单</a> 
+    <a  id="btn-edit"  class="easyui-menubutton" data-options="menu:'#m购物商场'">课堂分类</a>
+    <a  class="easyui-menubutton" data-options="menu:'#m会员管理'">资源库</a>    <a  class="easyui-menubutton" data-options="menu:'#m销售管理'">课堂公告</a>
+    <a  class="easyui-menubutton" data-options="menu:'#m个人中心'">个人中心</a>
+  </div>
+
+
+
+@*==子菜单设计*@
+   <div id="m购物商场" style="width:150px;">  @*购物商场菜单*@
+		<div>公共课</div>
+        <div>专业课</div>
+        <div>其他课</div>
+    </div>
+	<div id="m会员管理" style="width:150px;">@*会员管理菜单*@
+		<div>课堂视频</div>
+		<div>在线练习</div>
+		<div class="menu-sep"></div>
+        <div>资源下载</div>
+		<div>其他</div>
+		@*<div class="menu-sep"></div>
+        <div>会员积分记录</div>
+		<div>邮件模板设置</div>
+		<div class="menu-sep"></div>
+        <div>Oauth平台设置</div>*@
+	</div>     <div id="m销售管理" style="width:150px;">@*销售管理菜单*@
+		@*<div>商品订单列表</div>
+		<div>支付方式设置</div>
+        <div>配送方式配置</div>*@
+	</div>
+    <div id="m个人中心" style="width:150px;">@*m个人中心*@
+		<div>查看个人信息</div>
+		<div>修改个人信息</div>
+        @*<div>配送方式配置</div>*@
+	</div>
+    @*=上菜单设计######################################################################################*@
+
+
+   
+    @*=标题图片下面整个操作界面四大区域之三###############################################################*@
+	<div class="easyui-layout" style="width:1200px;height:500px;">
+    
+     @*==左边菜单###############*@
+		<div data-options="region:'west'" title="管理菜单" style="width:200px;">
+
+			<div class="easyui-accordion" data-options="fit:true,border:false,">
+                <div title="课堂分类" data-options="iconCls:'icon-产品资料'"  style="padding:10px;">@*===购物商场*@
+                <a  onclick="ChanPinLeiBie()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-产品类别'"style="width:95%;">公共课程</a>
+                <a  onclick="ChanPinLeiBie()" id="ChanPinZiLiao"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-产品资料'"style="width:95%;">专业课程</a>
+                <a  onclick="ChanPinLeiBie()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-产品类别'"style="width:95%;">其他课程</a>
+                </div>
+                <div title="资源库"   data-options="selected:true ,iconCls:'icon-供应商'"  style="padding:10px">@*===会员管理*@
+                <a  onclick="PeiSongFangShi()" class="easyui-linkbutton" data-options="  plain:true,iconCls:'icon-供应商'"style="width:95%;">课堂视频</a>
+                <a  onclick="HuiYuanZuBie()" class="easyui-linkbutton" data-options=" plain:true,iconCls:'icon-客户资料'"style="width:95%;">在线练习</a>
+                <a  onclick="HuiYuanDuanXin()" class="easyui-linkbutton"data-options="plain:true,iconCls:'icon-员工设置'"style="width:95%;">资源下载</a>
+                <a  onclick="HuiYuanXiaoFei()"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-银行账户'"style="width:95%;">其他信息</a>
+            @*    <a   onclick="HuiYuanJiFen()" class="easyui-linkbutton"  data-options="plain:true,iconCls:'icon-数据导入'"style="width:95%;">会员积分记录</a>
+                <a  onclick="YouJianMuBan()"  class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-产品BOM'"style="width:95%;">邮件模板设置</a>
+                <a   onclick="OauthPingTai()"   class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-采购退货'"style="width:95%;">Oauth平台设置</a>*@
+                  
+                </div>
+                <div title="课堂公告" data-options="iconCls:'icon-当前库存'" style="padding:10px">@*===销售管理*@
+                <a   onclick="PeiSongFangShi()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-外发入库'"style="width:95%;">课堂公告</a>
+                @*<a  onclick="DingDanLieBiao()"    class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-当前库存'"style="width:95%;">商品订单列表</a>
+                <a onclick="ZhiFuFangShi()"   class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-采购入库'"style="width:95%;">支付方式设置</a>
+                <a   onclick="PeiSongFangShi()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-外发入库'"style="width:95%;">配送方式配置</a>*@
+		        </div>
+
+                <div title="历史课程" data-options="iconCls:'icon-当前库存'" style="padding:10px">
+                <a onclick="ZhiFuFangShi()"   class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-采购入库'"style="width:95%;">张涛老师c语言基础</a>
+                <a onclick="ZhiFuFangShi()"   class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-采购入库'"style="width:95%;">李静梅老师java基础</a>
+                <a onclick="ZhiFuFangShi()"   class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-采购入库'"style="width:95%;">王梅老师数据库基础</a>
+                <a onclick="ZhiFuFangShi()"   class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-采购入库'"style="width:95%;">梁祝老师网页设计</a>
+		        </div>
+                @*<div title="我的作业" data-options="iconCls:'icon-当前库存'" style="padding:10px">
+                
+		        </div>*@
+                @*<div title="课堂笔记" data-options="iconCls:'icon-当前库存'" style="padding:10px">
+                
+		        </div>*@
+                <div title="成绩管理" data-options="iconCls:'icon-当前库存'" style="padding:10px">
+                
+		        </div>
+                <div title="教师资料" data-options="iconCls:'icon-当前库存'" style="padding:10px">
+                
+		        </div>
+                <div title="学生资料" data-options="iconCls:'icon-当前库存'" style="padding:10px">
+                
+		        </div>
+                 <div title="权限管理" data-options="iconCls:'icon-当前库存'" style="padding:10px">
+                
+		        </div>
+
+                <div title="个人中心" data-options="iconCls:'icon-供应商'" style="padding:10px">@*===销售管理*@
+                <a  onclick="HuiYuanXinXi()"    class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-当前库存'"style="width:95%;">查看个人信息</a>
+                @*<a onclick="ZhiFuFangShi()"   class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-采购入库'"style="width:95%;">修改个人信息</a>
+                <a   onclick="PeiSongFangShi()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-外发入库'"style="width:95%;">配送方式配置</a>*@
+		        </div>
+
+                
+             
+
+			</div>
+		</div>
+        @*==中间数据区域###############*@
+		<div data-options="region:'center'">
+        @* 嵌套网页*@
+        <iframe  id="f网页区"  style="width:100%;height:100%" scrolling=yes></iframe >
+		</div>
+	</div>
+ </body>
+</html>

@@ -1,0 +1,141 @@
+﻿ <!DOCTYPE html>
+<html><head>
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    </head>
+     <script type="text/javascript">
+         $(document).ready(function () {
+             //            $('#txtFuJiID').attr('value', @Session["商品类别ID"]);
+             cboPeiSongFangShiBindingdata();
+             cboZhiFuFangShiiBindingdata();
+             $('#w订单列表').window({//窗口初始化 
+                 //重要的部分 
+                 onBeforeClose: function () {
+                     //当面板关闭之前触发的事件 
+                     var GuanBi = ShiFouGuanBi();
+                     if (GuanBi != true)
+                         return false;
+                 }
+
+             });
+             $('#w订单列表').window('open');
+
+
+             //查询仓库信息
+             $.getJSON("/ChanPinZiLiao/ChaXunCangKu",
+              function (data) {
+                  $('#cboCangKu').combobox({ data: data, valueField: 'id',
+                      textField: 'text'
+                  });
+              }
+           );
+             $.getJSON("/ChanPinZiLiao/ChaXunChangShang",
+              function (data) {
+                  $('#cboChangShang').combobox({ data: data, valueField: 'id',
+                      textField: 'text'
+                  });
+              }
+           );
+
+             $.getJSON("/ChanPinZiLiao/ChaXunWuLiaoLeiXing",
+              function (data) {
+                  $('#cboSuoShuLeiXing').combotree("loadData", data);
+              }
+             );
+         });
+         //判断是否关闭窗体
+
+         function ShiFouGuanBi() {
+             if (confirm('窗口正在关闭，请确认您当前的操作已保存。\n 是否继续关闭窗口？')) {
+                 $('#w订单列表').window('close', true); //这里调用close 方法，true 表示面板被关闭的时候忽略onBeforeClose 回调函数。 
+                 window.location.href = "/DingDanLieBiao/DingDanLieBiao";
+             } else
+                 return false;
+         }
+         //下拉框属性数据绑定
+         function cboPeiSongFangShiBindingdata() {
+
+             $.getJSON("/DingDanLieBiao/ChaXunPeiSongFangShi",
+              function (data) {
+                  $('#cboPeiSongFangShi').combobox({ data: data, valueField: '会员等级ID',
+                      textField: '会员等级'
+                  });
+
+              });
+         }
+         //下拉框属性数据绑定
+         function cboZhiFuFangShiiBindingdata() {
+
+             $.getJSON("/DingDanLieBiao/ChaXunZhiFuFangShi",
+              function (data) {
+                  $('#cboZhiFuFangShi').combobox({ data: data, valueField: '会员状态ID',
+                      textField: '会员状态'
+                  });
+
+              });
+         }
+         function TianJia() {
+             if (confirm('是否添加？')) {
+                 var dazhe = true;
+                 var n = $("input:checked").length;
+                 if (n == 0) {
+                     dazhe = false;
+                 }
+                 $.getJSON("/DingDanLieBiao/TianJiaDingDanLieBiao?strPeiSongFangShiID=" + $('#cboPeiSongFangShi').combobox('getValue') + "&"
+                                        + "strZhiFuFangShiID=" + $('#cboZhiFuFangShi').combobox('getValue') + "&"
+                                        + "strYongHuMing=" + $('#txtYongHuMing').val() + "&"
+                                        + "strMiMa=" + $('#txtMiMa').val() + "&"
+                                        + "strNiCheng=" + $('#txtNiCheng').val() + "&"
+                                        + "strYouXiang=" + $('#txtZongJinE').val() + "&"
+                                        + "strXingBie=" + $('#txtXingBie').val() + "&"
+                                        + "strQQ=" + $('#txtQQHaoMa').val() + "&"
+                                        + "strBanGongDianHua=" + $('#txtDianHua').val() + "&",
+
+                function (data) {
+                    if (data != null) {
+                        alert("添加成功");
+                        window.location.href = "/DingDanLieBiao/DingDanLieBiao";
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+
+                });
+             }
+         }
+       </script>
+<body>
+  <div id="w订单列表" class="easyui-window" title="新增订单列表"  data-options="modal:true,closed:true,iconCls:'icon-产品资料'" style="width:480px;height:380px;padding:10px;  top: 30px; left:300px;">
+	<table>
+    <tr>
+     <td align="right">配送方式：</td><td><input id="cboPeiSongFangShi" class="easyui-combobox" name="state" style="width:135px;"></input></td>
+    <td align="right">支付方式： </td><td><input id="cboZhiFuFangShi" class="easyui-combobox" name="state" style="width:135px;"></input>
+    </tr>
+ 
+                    <tr> 
+                       <td align="right">用户名：</td><td> <input id="txtYongHuMing"   style="width:130px"></input></td>
+                    </tr>
+                    <tr>
+                      <td align="right">总金额：</td><td colspan=3><input id="txtZongJinE" class="submit" style="width:335px"></input></td>
+                    </tr>
+                  
+               <td style ="height : 50px" colspan=4 align="center">
+                
+               <a  id="btnTianJia" onclick="TianJia()" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">添加</a>
+
+
+               <a onclick="ShiFouGuanBi()" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出</a>
+             
+             </td>
+            
+            </tr>
+
+        </table>
+  </div>
+    </body>
+    </html>

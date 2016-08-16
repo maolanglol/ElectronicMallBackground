@@ -1,0 +1,141 @@
+﻿ <!DOCTYPE html>
+<html><head>
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    </head>
+     <script type="text/javascript">
+         $(document).ready(function () {
+             //            $('#txtFuJiID').attr('value', @Session["商品类别ID"]);
+             $('#w邮件模板').window({//窗口初始化 
+                 //重要的部分 
+                 onBeforeClose: function () {
+                     //当面板关闭之前触发的事件 
+                     var GuanBi = ShiFouGuanBi();
+                     if (GuanBi != true)
+                         return false;
+                 }
+
+             });
+             $('#w邮件模板').window('open');
+
+
+             //查询仓库信息
+             $.getJSON("/ChanPinZiLiao/ChaXunCangKu",
+              function (data) {
+                  $('#cboCangKu').combobox({ data: data, valueField: 'id',
+                      textField: 'text'
+                  });
+              }
+           );
+             $.getJSON("/ChanPinZiLiao/ChaXunChangShang",
+              function (data) {
+                  $('#cboChangShang').combobox({ data: data, valueField: 'id',
+                      textField: 'text'
+                  });
+              }
+           );
+
+             $.getJSON("/ChanPinZiLiao/ChaXunWuLiaoLeiXing",
+              function (data) {
+                  $('#cboSuoShuLeiXing').combotree("loadData", data);
+              }
+             );
+         });
+         //判断是否关闭窗体
+
+         function ShiFouGuanBi() {
+             if (confirm('窗口正在关闭，请确认您当前的操作已保存。\n 是否继续关闭窗口？')) {
+                 $('#w邮件模板').window('close', true); //这里调用close 方法，true 表示面板被关闭的时候忽略onBeforeClose 回调函数。 
+                 window.location.href = "/YouJianMuBan/YouJianMuBan";
+             } else
+                 return false;
+         }
+         //下拉框属性数据绑定
+         function cboYouJianMuBanLeiXingBindingdata() {
+
+             $.getJSON("/YouJianMuBan/ChaXunHuiYuanDengJi",
+              function (data) {
+                  $('#cboDuanXinLeiXing').combobox({ data: data, valueField: '邮件模板类型ID',
+                      textField: '短信类型'
+                  });
+
+              });
+         }
+         //下拉框属性数据绑定
+         function cboChaXunHuiYuanYongHuMingBindingdata() {
+
+             $.getJSON("/YouJianMuBan/ChaXunHuiYuanYongHuMing",
+              function (data) {
+                  $('#cboYongHuMing').combobox({ data: data, valueField: '会员ID',
+                      textField: '昵称'
+                  });
+
+              });
+         }
+         function TianJia() {
+             if (confirm('是否添加？')) {
+                 var dazhe = true;
+                 var n = $("input:checked").length;
+                 if (n == 0) {
+                     dazhe = false;
+                 }
+                 $.getJSON("/YouJianMuBan/TianJiaYouJianMuBan?strDiaoYongBieMing=" + $('#txtDiaoYongBieMing').val() + "&"
+                                           + "strBiaoTi=" + $('#txtBiaoTi').val() + "&"
+                                              + "strYouJianBiaoTi=" + $('#txtYouJianBiaoTi').val() + "&"
+                                                 + "strXiTongMoRen=" + $('#txtXiTongMoRen').val() + "&"
+                                               
+                                     ,
+
+                function (data) {
+                    if (data != null) {
+                        alert("添加成功");
+                        window.location.href = "/YouJianMuBan/YouJianMuBan";
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+
+                });
+             }
+         }
+       </script>
+<body>
+  <div id="w邮件模板" class="easyui-window" title="新增邮件模板"  data-options="modal:true,closed:true,iconCls:'icon-产品资料'" style="width:480px;height:280px;padding:10px;  top: 30px; left:300px;">
+	<table>
+    
+ 
+                    <tr>
+                      <td align="right">调用别名：</td><td colspan=3><input id="txtDiaoYongBieMing" class="submit" style="width:335px"></input></td>
+                    </tr>
+                      <tr>
+                      <td align="right">标题：</td><td colspan=3><input id="txtBiaoTi" class="submit" style="width:335px"></input></td>
+                    </tr>
+                      <tr>
+                      <td align="right">邮件标题：</td><td colspan=3><input id="txtYouJianBiaoTi" class="submit" style="width:335px"></input></td>
+                    </tr>
+  <tr>
+                      <td align="right">系统默认：</td><td colspan=3><input id="txtXiTongMoRen" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    
+
+                  
+               <td style ="height : 50px" colspan=4 align="center">
+                
+               <a  id="btnTianJia" onclick="TianJia()" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">添加</a>
+
+
+               <a onclick="ShiFouGuanBi()" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出</a>
+             
+             </td>
+            
+            </tr>
+
+        </table>
+  </div>
+    </body>
+    </html>

@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="易特进销存工业版ModelStoreContainer" CdmEntityContainer="易特进销存工业版Entities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="采购订单表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.采购订单表">
+        <MappingFragment StoreEntitySet="采购订单表">
+          <ScalarProperty Name="采购订单ID" ColumnName="采购订单ID" />
+          <ScalarProperty Name="订单类型ID" ColumnName="订单类型ID" />
+          <ScalarProperty Name="采购订单编码" ColumnName="采购订单编码" />
+          <ScalarProperty Name="供货商ID" ColumnName="供货商ID" />
+          <ScalarProperty Name="审核员工ID" ColumnName="审核员工ID" />
+          <ScalarProperty Name="经手员工ID" ColumnName="经手员工ID" />
+          <ScalarProperty Name="付款方式PubID" ColumnName="付款方式PubID" />
+          <ScalarProperty Name="原始单号" ColumnName="原始单号" />
+          <ScalarProperty Name="生产单号" ColumnName="生产单号" />
+          <ScalarProperty Name="下单时间" ColumnName="下单时间" />
+          <ScalarProperty Name="交货日期" ColumnName="交货日期" />
+          <ScalarProperty Name="预付金额" ColumnName="预付金额" />
+          <ScalarProperty Name="应付金额" ColumnName="应付金额" />
+          <ScalarProperty Name="申购部门PubID" ColumnName="申购部门PubID" />
+          <ScalarProperty Name="采购类别PubID" ColumnName="采购类别PubID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="采购明细表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.采购明细表">
+        <MappingFragment StoreEntitySet="采购明细表">
+          <ScalarProperty Name="采购明细ID" ColumnName="采购明细ID" />
+          <ScalarProperty Name="采购订单ID" ColumnName="采购订单ID" />
+          <ScalarProperty Name="物料ID" ColumnName="物料ID" />
+          <ScalarProperty Name="属性明细PubID" ColumnName="属性明细PubID" />
+          <ScalarProperty Name="数量" ColumnName="数量" />
+          <ScalarProperty Name="单价" ColumnName="单价" />
+          <ScalarProperty Name="税率" ColumnName="税率" />
+          <ScalarProperty Name="备注" ColumnName="备注" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="仓库表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.仓库表">
+        <MappingFragment StoreEntitySet="仓库表">
+          <ScalarProperty Name="仓库ID" ColumnName="仓库ID" />
+          <ScalarProperty Name="仓库名称" ColumnName="仓库名称" />
+          <ScalarProperty Name="负责人" ColumnName="负责人" />
+          <ScalarProperty Name="联系方式" ColumnName="联系方式" />
+          <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="备注" ColumnName="备注" />
+          <ScalarProperty Name="默认否" ColumnName="默认否" />
+          <ScalarProperty Name="有效否" ColumnName="有效否" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="出入单据表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.出入单据表">
+        <MappingFragment StoreEntitySet="出入单据表">
+          <ScalarProperty Name="出入票据ID" ColumnName="出入票据ID" />
+          <ScalarProperty Name="出入票据编码" ColumnName="出入票据编码" />
+          <ScalarProperty Name="供货商ID" ColumnName="供货商ID" />
+          <ScalarProperty Name="采购订单ID" ColumnName="采购订单ID" />
+          <ScalarProperty Name="生产单号" ColumnName="生产单号" />
+          <ScalarProperty Name="送货单号" ColumnName="送货单号" />
+          <ScalarProperty Name="运费" ColumnName="运费" />
+          <ScalarProperty Name="优惠价格" ColumnName="优惠价格" />
+          <ScalarProperty Name="付款方式ID" ColumnName="付款方式ID" />
+          <ScalarProperty Name="开发票否" ColumnName="开发票否" />
+          <ScalarProperty Name="发票编号" ColumnName="发票编号" />
+          <ScalarProperty Name="发票票据编码" ColumnName="发票票据编码" />
+          <ScalarProperty Name="出入库员工ID" ColumnName="出入库员工ID" />
+          <ScalarProperty Name="审核员工ID" ColumnName="审核员工ID" />
+          <ScalarProperty Name="审核否" ColumnName="审核否" />
+          <ScalarProperty Name="出入时间" ColumnName="出入时间" />
+          <ScalarProperty Name="出入库类型ID" ColumnName="出入库类型ID" />
+          <ScalarProperty Name="备注" ColumnName="备注" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="出入库类型表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.出入库类型表">
+        <MappingFragment StoreEntitySet="出入库类型表">
+          <ScalarProperty Name="出入库类型ID" ColumnName="出入库类型ID" />
+          <ScalarProperty Name="出入库类型名称" ColumnName="出入库类型名称" />
+          <ScalarProperty Name="出入库类型简称" ColumnName="出入库类型简称" />
+          <ScalarProperty Name="入库否" ColumnName="入库否" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="出入库明细表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.出入库明细表">
+        <MappingFragment StoreEntitySet="出入库明细表">
+          <ScalarProperty Name="出入库ID" ColumnName="出入库ID" />
+          <ScalarProperty Name="物料ID" ColumnName="物料ID" />
+          <ScalarProperty Name="入库否" ColumnName="入库否" />
+          <ScalarProperty Name="出入票据ID" ColumnName="出入票据ID" />
+          <ScalarProperty Name="采购订单ID" ColumnName="采购订单ID" />
+          <ScalarProperty Name="出入库数量" ColumnName="出入库数量" />
+          <ScalarProperty Name="税率_" ColumnName="税率%" />
+          <ScalarProperty Name="基重" ColumnName="基重" />
+          <ScalarProperty Name="备注" ColumnName="备注" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="订单类型表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.订单类型表">
+        <MappingFragment StoreEntitySet="订单类型表">
+          <ScalarProperty Name="订单类型ID" ColumnName="订单类型ID" />
+          <ScalarProperty Name="订单类型名称" ColumnName="订单类型名称" />
+          <ScalarProperty Name="订单类型简称" ColumnName="订单类型简称" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="供货商表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.供货商表">
+        <MappingFragment StoreEntitySet="供货商表">
+          <ScalarProperty Name="供货商ID" ColumnName="供货商ID" />
+          <ScalarProperty Name="供应商类型PubID" ColumnName="供应商类型PubID" />
+          <ScalarProperty Name="供应商结算方式PubID" ColumnName="供应商结算方式PubID" />
+          <ScalarProperty Name="区域IDPubID" ColumnName="区域IDPubID" />
+          <ScalarProperty Name="供货商编码" ColumnName="供货商编码" />
+          <ScalarProperty Name="供货商名称" ColumnName="供货商名称" />
+          <ScalarProperty Name="助记码" ColumnName="助记码" />
+          <ScalarProperty Name="公司名称" ColumnName="公司名称" />
+          <ScalarProperty Name="联系人" ColumnName="联系人" />
+          <ScalarProperty Name="联系电话" ColumnName="联系电话" />
+          <ScalarProperty Name="联系地址" ColumnName="联系地址" />
+          <ScalarProperty Name="期初应付" ColumnName="期初应付" />
+          <ScalarProperty Name="传真" ColumnName="传真" />
+          <ScalarProperty Name="邮箱" ColumnName="邮箱" />
+          <ScalarProperty Name="主页" ColumnName="主页" />
+          <ScalarProperty Name="税号" ColumnName="税号" />
+          <ScalarProperty Name="税率" ColumnName="税率" />
+          <ScalarProperty Name="备注" ColumnName="备注" />
+          <ScalarProperty Name="默认否" ColumnName="默认否" />
+          <ScalarProperty Name="有效否" ColumnName="有效否" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="交易银行账户表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.交易银行账户表">
+        <MappingFragment StoreEntitySet="交易银行账户表">
+          <ScalarProperty Name="交易银行账户ID" ColumnName="交易银行账户ID" />
+          <ScalarProperty Name="供货商ID" ColumnName="供货商ID" />
+          <ScalarProperty Name="客户ID" ColumnName="客户ID" />
+          <ScalarProperty Name="交易商银行账户名称" ColumnName="交易商银行账户名称" />
+          <ScalarProperty Name="账号" ColumnName="账号" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="客户表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.客户表">
+        <MappingFragment StoreEntitySet="客户表">
+          <ScalarProperty Name="客户ID" ColumnName="客户ID" />
+          <ScalarProperty Name="客户等级PubID" ColumnName="客户等级PubID" />
+          <ScalarProperty Name="价格等级PubID" ColumnName="价格等级PubID" />
+          <ScalarProperty Name="客户状态PubID" ColumnName="客户状态PubID" />
+          <ScalarProperty Name="客户阶段PubID" ColumnName="客户阶段PubID" />
+          <ScalarProperty Name="区域PubID" ColumnName="区域PubID" />
+          <ScalarProperty Name="客户类别PubID" ColumnName="客户类别PubID" />
+          <ScalarProperty Name="负责业务PubID" ColumnName="负责业务PubID" />
+          <ScalarProperty Name="客户来源PubID" ColumnName="客户来源PubID" />
+          <ScalarProperty Name="行业类别PubID" ColumnName="行业类别PubID" />
+          <ScalarProperty Name="交易类型PubID" ColumnName="交易类型PubID" />
+          <ScalarProperty Name="街道地址" ColumnName="街道地址" />
+          <ScalarProperty Name="邮编" ColumnName="邮编" />
+          <ScalarProperty Name="客户编码" ColumnName="客户编码" />
+          <ScalarProperty Name="客户名称" ColumnName="客户名称" />
+          <ScalarProperty Name="公司全称" ColumnName="公司全称" />
+          <ScalarProperty Name="主联系人" ColumnName="主联系人" />
+          <ScalarProperty Name="联系电话" ColumnName="联系电话" />
+          <ScalarProperty Name="QQ" ColumnName="QQ" />
+          <ScalarProperty Name="淘宝旺旺" ColumnName="淘宝旺旺" />
+          <ScalarProperty Name="阿里旺旺" ColumnName="阿里旺旺" />
+          <ScalarProperty Name="MSN" ColumnName="MSN" />
+          <ScalarProperty Name="skype" ColumnName="skype" />
+          <ScalarProperty Name="办公电话" ColumnName="办公电话" />
+          <ScalarProperty Name="邮箱" ColumnName="邮箱" />
+          <ScalarProperty Name="税号" ColumnName="税号" />
+          <ScalarProperty Name="税率" ColumnName="税率" />
+          <ScalarProperty Name="助记码" ColumnName="助记码" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="库存表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.库存表">
+        <MappingFragment StoreEntitySet="库存表">
+          <ScalarProperty Name="库存ID" ColumnName="库存ID" />
+          <ScalarProperty Name="物料价格ID" ColumnName="物料价格ID" />
+          <ScalarProperty Name="仓库ID" ColumnName="仓库ID" />
+          <ScalarProperty Name="库存数" ColumnName="库存数" />
+          <ScalarProperty Name="库存上限" ColumnName="库存上限" />
+          <ScalarProperty Name="库存下限" ColumnName="库存下限" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="生产商表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.生产商表">
+        <MappingFragment StoreEntitySet="生产商表">
+          <ScalarProperty Name="生产商ID" ColumnName="生产商ID" />
+          <ScalarProperty Name="生产商名称" ColumnName="生产商名称" />
+          <ScalarProperty Name="联系人" ColumnName="联系人" />
+          <ScalarProperty Name="联系电话" ColumnName="联系电话" />
+          <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="主页" ColumnName="主页" />
+          <ScalarProperty Name="QQ" ColumnName="QQ" />
+          <ScalarProperty Name="邮箱" ColumnName="邮箱" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="物料表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.物料表">
+        <MappingFragment StoreEntitySet="物料表">
+          <ScalarProperty Name="物料ID" ColumnName="物料ID" />
+          <ScalarProperty Name="物料编码" ColumnName="物料编码" />
+          <ScalarProperty Name="助记码" ColumnName="助记码" />
+          <ScalarProperty Name="物料名称" ColumnName="物料名称" />
+          <ScalarProperty Name="规格" ColumnName="规格" />
+          <ScalarProperty Name="默认仓库ID" ColumnName="默认仓库ID" />
+          <ScalarProperty Name="默认储位" ColumnName="默认储位" />
+          <ScalarProperty Name="生产商ID" ColumnName="生产商ID" />
+          <ScalarProperty Name="颜色PubID" ColumnName="颜色PubID" />
+          <ScalarProperty Name="计量单位PubID" ColumnName="计量单位PubID" />
+          <ScalarProperty Name="物料类别PubID" ColumnName="物料类别PubID" />
+          <ScalarProperty Name="数量" ColumnName="数量" />
+          <ScalarProperty Name="条形码" ColumnName="条形码" />
+          <ScalarProperty Name="有效否" ColumnName="有效否" />
+          <ScalarProperty Name="基本重量" ColumnName="基本重量" />
+          <ScalarProperty Name="限售建议价格" ColumnName="限售建议价格" />
+          <ScalarProperty Name="预设进价" ColumnName="预设进价" />
+          <ScalarProperty Name="VIP价格" ColumnName="VIP价格" />
+          <ScalarProperty Name="会员价格" ColumnName="会员价格" />
+          <ScalarProperty Name="备注" ColumnName="备注" />
+          <ScalarProperty Name="成本价格" ColumnName="成本价格" />
+          <ScalarProperty Name="打折否" ColumnName="打折否" />
+          <ScalarProperty Name="选择" ColumnName="选择" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="物料价格标">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.物料价格标">
+        <MappingFragment StoreEntitySet="物料价格标">
+          <ScalarProperty Name="物料价格ID" ColumnName="物料价格ID" />
+          <ScalarProperty Name="物料ID" ColumnName="物料ID" />
+          <ScalarProperty Name="入库价格" ColumnName="入库价格" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="员工表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.员工表">
+        <MappingFragment StoreEntitySet="员工表">
+          <ScalarProperty Name="员工ID" ColumnName="员工ID" />
+          <ScalarProperty Name="部门PubID" ColumnName="部门PubID" />
+          <ScalarProperty Name="姓名" ColumnName="姓名" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="属性集合表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.属性集合表">
+        <MappingFragment StoreEntitySet="属性集合表">
+          <ScalarProperty Name="属性集合Id" ColumnName="属性集合Id" />
+          <ScalarProperty Name="属性集合名称" ColumnName="属性集合名称" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="属性明细表">
+      <EntityTypeMapping TypeName="易特进销存工业版Model.属性明细表">
+        <MappingFragment StoreEntitySet="属性明细表">
+          <ScalarProperty Name="属性明细PubID" ColumnName="属性明细PubID" />
+          <ScalarProperty Name="属性集合ID" ColumnName="属性集合ID" />
+          <ScalarProperty Name="属性明细PubID_Far" ColumnName="属性明细PubID_Far" />
+          <ScalarProperty Name="属性明细名称" ColumnName="属性明细名称" />
+          <ScalarProperty Name="有效否" ColumnName="有效否" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

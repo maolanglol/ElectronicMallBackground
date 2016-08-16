@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html><head>
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+    <script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+   </head>
+   <script type="text/javascript">
+
+       var BangDing = 0; //判断是否完绑定数据
+       $(document).ready(function () {
+           //显示窗体
+           $('#w配送方式').window('open');
+           $.getJSON("/PeiSongFangShi/ChaXunQuanBuPeiSongFangShi",
+                                function (data) {
+                                    $('#tb配送方式').datagrid('loadData', data);
+                                    BangDing++;
+                                }
+          );
+           //           //树形控件的绑定
+           //           //                                $('#trePeiSongFangShi').tree({ url: '/ChanPinZiLiao/ChaXunWuLiaoLeiXing' });
+           //           $.getJSON("/ChanPinZiLiao/ChaXunWuLiaoLeiXing",
+           //              function (data) {
+           //                  $('#trePeiSongFangShi').tree("loadData", data);
+           //                  BangDing++;
+           //              }
+           //            );
+       });
+       //模糊查询商品信息，然后绑定到datagrid
+       function getPeiSongFangShi() {
+           if ($("#txtNeiRong").val() == "") {
+               alert("请输入查询内容");
+           }
+           else {
+               $.getJSON("/PeiSongFangShi/MoHuChaXun?strMoHu=" + $("#txtNeiRong").val(),
+                function (data) {
+                    $('#tb配送方式').datagrid('loadData', data);
+                });
+           }
+       }
+
+       //点击某节点，查询该节点的商品信息
+       function PeiSongFangShiChaXun() {
+           var node = $('#trePeiSongFangShi').tree('getSelected');
+           if (node) {
+               var WuLiaoLeiXingID = node.id;
+
+               $.getJSON("/ChanPinZiLiao/LeiBieChaXunXinXi?WuliaoLeiXingID=" + WuLiaoLeiXingID,
+                function (data) {
+                    $('#tb配送方式').datagrid('loadData', data);
+                });
+           }
+       }
+       //点击商品，删除商品信息
+       function PeiSongFangShiShanChu() {
+
+           if (confirm('是否删除？')) {
+               var row = $('#tb配送方式').datagrid('getSelected');
+               if (row) {
+
+                   $.getJSON("/PeiSongFangShi/DeletePeiSongFangShi?配送方式ID=" + row.配送方式ID,
+                function (data) {
+                    if (data != null) {
+                        alert("删除成功");
+                        $.getJSON("/PeiSongFangShi/ChaXunQuanBuPeiSongFangShi",
+                                function (data) {
+                                    $('#tb配送方式').datagrid('loadData', data);
+
+                                }
+            );
+                    }
+                });
+               }
+               else {
+                   alert("请选择需要删除的商品");
+
+               }
+           }
+           else
+               return false;
+
+       }
+       //点击商品，添加商品类别信息
+       function PeiSongFangShiTianJiai() {
+
+           window.location.href = "/PeiSongFangShi/InsertPeiSongFangShi"; 
+
+       }
+
+       //点击商品，修改商品类别信息
+       function PeiSongFangShiXiuGai() {
+           var row = $('#tb配送方式').datagrid('getSelected');
+           if (row) {
+               window.location.href = "/PeiSongFangShi/UpdatePeiSongFangShi?配送方式ID=" + row.配送方式ID;
+           }
+           else {
+               alert("请选择需要修改的会员");
+
+           }
+
+
+       }
+
+
+
+       function start() {
+
+           $('#wstart').window('open');
+           var value = $('#p').progressbar('getValue');
+           if (value < 100) {
+
+               value = BangDing * 50;
+               $('#p').progressbar('setValue', value);
+               setTimeout(arguments.callee, 200);
+           }
+           else {
+               $('#p').progressbar('setValue', 0);
+
+               $('#wstart').window('close');
+               BangDing = 0;
+           }
+       }</script>
+<body> @*进度条*@   <div id="wstart" class="easyui-window" title="数据加载中"  data-options="modal:true,iconCls:'icon-产品资料'" style="width:440px;height:100px;padding:10px;  top: 150px; left:300px;">
+
+        <div id="p"   class="easyui-progressbar" style="width:400px;"></div>   </div>   @*=弹出的产品资料窗体#########################3*@     <div id="w配送方式" class="easyui-window" title="课堂公告"  data-options="modal:true, maximized:true,iconCls:'icon-产品资料'" style="width:1010px;height:435px;padding:10px;  top: 1px; left: 1px;">
+		<table>
+            <tr> 
+              <td>请输入标题\备注查询：</td>
+               <td><input id="txtNeiRong" class="submit" style="width:200px"></input></td>
+               <td>
+               <a onclick="getPeiSongFangShi()" class="easyui-linkbutton" data-options="iconCls:'icon-查询'" >查询</a>
+              @* <a onclick="PeiSongFangShiTianJiai()" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">添加</a>
+               <a  onclick="PeiSongFangShiXiuGai()" class="easyui-linkbutton" data-options="iconCls:'icon-修改'">修改</a>
+               <a onclick="PeiSongFangShiShanChu()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删除</a>*@               </td>
+            </tr>
+        </table>
+         <table>
+               <tr>
+              
+               <td>
+             <table id="tb配送方式" class="easyui-datagrid" title="课堂公告" style="width:940px;height:340px"              data-options="singleSelect:true">
+		        <thead>
+			        <tr>
+                        <th data-options="field:'配送方式ID',width:120,hidden:'true', align:'center'">配送方式ID</th>
+                        <th data-options="field:'排序',width:120,align:'center'">视频序号</th>
+                        <th data-options="field:'标题',width:120, align:'center'">标题</th>
+                        <th data-options="field:'备注',width:420,align:'center'">内容</th>
+                        <th data-options="field:'时间',width:120,align:'center'">更新时间</th>
+                        <th data-options="field:'状态',width:80, align:'center'">下载</th>
+			        </tr>
+		        </thead>
+	       </table>
+               </td>
+               </tr>
+                  </table>
+	</div>    @*=弹出的产品资料窗体#########################3*@    
+</body>
+</html>

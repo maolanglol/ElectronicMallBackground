@@ -1,0 +1,561 @@
+﻿@RenderBody()
+<!DOCTYPE html>
+<html>
+
+@section head{
+<meta content="text/javascript;charset=utf-8" />
+	<title>Basic Layout - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+ <style type="text/css">
+   /*系统提醒按钮图片*/
+ .icon-业务模块
+{
+    background: url('../../Content/图片/系统提醒/业务模块.png') no-repeat center center;
+}
+
+ .icon-账款
+{
+    background: url('../../Content/图片/系统提醒/账款.png') no-repeat center center;
+}
+.icon-外发模块
+{
+    background: url('../../Content/图片/系统提醒/外发模块.png') no-repeat center center;
+}
+.icon-库存
+{
+    background: url('../../Content/图片/系统提醒/库存.png') no-repeat center center;
+}
+.icon-采购模块
+{
+    background: url('../../Content/图片/系统提醒/采购模块.png') no-repeat center center;
+}
+ /*基础数据按钮图片*/
+.icon-仓库设置
+{
+    background: url('../../Content/图片/基础数据/仓库设置.png') no-repeat center center;
+}
+
+ .icon-产品BOM
+{
+    background: url('../../Content/图片/基础数据/产品BOM.png') no-repeat center center;
+}
+.icon-产品类别
+{
+    background: url('../../Content/图片/基础数据/产品类别.png') no-repeat center center;
+}
+.icon-产品资料
+{
+    background: url('../../Content/图片/基础数据/产品资料.png') no-repeat center center;
+}
+.icon-供应商
+{
+    background: url('../../Content/图片/基础数据/供应商.png') no-repeat center center;
+}
+.icon-客户资料
+{
+    background: url('../../Content/图片/基础数据/客户资料.png') no-repeat center center;
+}
+.icon-数据导入
+{
+    background: url('../../Content/图片/基础数据/数据导入.png') no-repeat center center;
+}
+.icon-银行账户
+{
+    background: url('../../Content/图片/基础数据/银行账户.png') no-repeat center center;
+}
+.icon-员工设置
+{
+    background: url('../../Content/图片/基础数据/员工设置.png') no-repeat center center;
+}
+ /*采购管理按钮图片*/
+ .icon-采购
+{
+    background: url('../../Content/图片/采购.png') no-repeat center center;
+}
+/*入库管理按钮图片*/
+.icon-采购入库
+{
+    background: url('../../Content/图片/入库管理/采购入库.png') no-repeat center center;
+}
+.icon-采购退货
+{
+    background: url('../../Content/图片/入库管理/采购退货.png') no-repeat center center;
+}
+.icon-生产入库
+{
+    background: url('../../Content/图片/入库管理/生产入库.png') no-repeat center center;
+}
+.icon-外发入库
+{
+    background: url('../../Content/图片/入库管理/外发入库.png') no-repeat center center;
+}
+.icon-外发退料
+{
+    background: url('../../Content/图片/入库管理/外发退料.png') no-repeat center center;
+}
+.icon-当前库存
+{
+    background: url('../../Content/图片/入库管理/当前库存.png') no-repeat center center;
+}
+/*财务管理管理按钮图片*/
+.icon-财务管理
+{
+    background: url('../../Content/图片/财务管理.png') no-repeat center center;
+}
+/*报表管理管理按钮图片*/
+.icon-报表
+{
+    background: url('../../Content/图片/报表.png') no-repeat center center;
+}
+
+/*系统设置管理按钮图片*/
+.icon-系统设置
+{
+    background: url('../../Content/图片/系统设置.png') no-repeat center center;
+}
+/*查询、添加、修改按钮图片*/
+.icon-查询
+{
+    background: url('../../Content/图片/查询.png') no-repeat center center;
+}
+.icon-添加
+{
+    background: url('../../Content/图片/添加.png') no-repeat center center;
+}
+.icon-修改
+{
+    background: url('../../Content/图片/修改.png') no-repeat center center;
+}
+
+ </style>
+}
+<body>
+<div style="background:url('http://localhost:2562/Content/图片/主界面顶图片.png'); width:950px;height:20px;">
+   </div>
+@*=上菜单设计######################################################################################*@
+    <a id="btn-edit" href="#" class="easyui-menubutton" data-options="menu:'#m基础数据'">基础数据</a>
+  <a href="#" class="easyui-menubutton" data-options="menu:'#m采购管理'">采购管理</a>  <a href="#" class="easyui-menubutton" data-options="menu:'#m业务管理'">业务管理</a>  <a href="#" class="easyui-menubutton" data-options="menu:'#m入库管理'">入库管理</a>  <a href="#" class="easyui-menubutton" data-options="menu:'#m出库管理'">出库管理</a>   <a href="#" class="easyui-menubutton" data-options="menu:'#m库存管理'">库存管理</a>  <a href="#" class="easyui-menubutton" data-options="menu:'#m财务管理'">财务管理</a>  <a href="#" class="easyui-menubutton" data-options="menu:'#m统计报表'">统计报表</a>   <a href="#" class="easyui-menubutton" data-options="menu:'#m系统管理'">系统管理</a>
+   <div id="m基础数据" style="width:150px;">
+		<div>产品类别</div>
+		<div>产品单位</div>
+		<div>产品颜色</div>
+		<div>产品规格</div>
+      <div class="menu-sep"></div>
+		<div>仓库设置</div>
+		<div>产品资料管理</div>
+		<div onclick="$('#w产品资料').window('open')">添加产品</div>
+		<div>产品BOM</div>
+      <div class="menu-sep"></div>
+      <div>供应商类别</div>
+		<div>
+           <span>客户设置</span>
+           <div style="width:150px;">
+                <div>客户类型</div>
+		        <div>客户类别</div>
+		        <div>客户等级</div>
+		        <div>客户区域</div>
+                <div>客户阶段</div>
+		        <div>客户行业</div>
+		        <div>客户来源</div>
+		        <div>销售机会</div>
+            </div>
+        </div>
+		<div>客户资料管理</div>
+		<div>部门设置</div>
+        <div>员工设置</div>
+		<div>员工管理</div>
+      <div class="menu-sep"></div>
+		<div>银行账户管理</div>
+		<div>期初库存建账</div>
+		<div>发票类型设置</div>
+        <div>快递设置</div> 
+	</div>
+
+
+
+	<div id="m采购管理" style="width:150px;">
+		<div>供应商报价管理</div>
+		<div>新增供应商报价</div>
+		<div class="menu-sep"></div>
+        <div>申购单管理</div>
+		<div>新增申购单</div>
+		<div class="menu-sep"></div>
+        <div>采购订单管理</div>
+		<div>新增采购订单</div>
+		<div class="menu-sep"></div>
+        <div>外发加工订单管理</div>
+		<div>新增外发加工订单</div>
+	</div>    <div id="m业务管理" style="width:150px;">
+		<div>客户跟进管理</div>
+		<div>联系管理</div>
+        <div>销售机会管理</div>
+		<div class="menu-sep"></div>
+        <div>客户报价管理</div>
+		<div>新增客户报价</div>
+		<div class="menu-sep"></div>
+        <div>客户订单管理</div>
+		<div>新增客户订单</div>
+	    <div class="menu-sep"></div>
+        <div>生产计划管理</div>
+		<div>新增生产计划</div>
+		<div>订单商品需求表</div>
+	</div>     <div id="m入库管理" style="width:150px;">
+		<div>采购入库管理</div>
+		<div>新增采购入库</div>
+		<div class="menu-sep"></div>
+        <div>采购退货管理</div>
+		<div>新增采购退货</div>
+		<div class="menu-sep"></div>
+        <div>生产入库管理</div>
+		<div>新增生产入库</div>
+	    <div class="menu-sep"></div>
+        <div>外发加工入库管理</div>
+		<div>新增外放加工入库</div>
+         <div class="menu-sep"></div>
+        <div>外发加工退料管理</div>
+		<div>新增外发加工退料</div>
+         <div class="menu-sep"></div>
+        <div>生产退料管理</div>
+		<div>新增生产退料</div>
+         <div class="menu-sep"></div>
+        <div>其它入库管理</div>
+		<div>新增其它入库</div>
+	</div>    <div id="m出库管理" style="width:150px;">
+		<div>销售出库管理</div>
+		<div>新增销售出库</div>
+        <div>销售排行榜</div>
+		<div class="menu-sep"></div>
+        <div>客户退货管理</div>
+		<div>新增客户退货</div>
+		<div class="menu-sep"></div>
+        <div>生产领料管理</div>
+		<div>新增生产领料</div>
+	    <div class="menu-sep"></div>
+        <div>外发加工领料管理</div>
+		<div>新增外放加工领料</div>
+         <div class="menu-sep"></div>
+        <div>其他出库管理</div>
+		<div>新增其它出库</div>
+	</div>    <div id="m库存管理" style="width:150px;">
+		<div>库存调拨管理</div>
+		<div>新增库存调拨</div>
+		<div class="menu-sep"></div>
+        <div>库存盘点管理</div>
+		<div>新增库存盘点</div>
+        <div>产品库存管理</div>
+		<div>产品流向</div>
+        <div>库存调整</div>
+		<div class="menu-sep"></div>
+        <div>库存报损管理</div>
+		<div>新增库存报损</div>
+	    <div class="menu-sep"></div>
+        <div>库存报溢管理</div>
+		<div>新增库存报溢</div>
+        <div class="menu-sep"></div>
+        <div>产品拆分管理</div>
+		<div>新增产品拆分</div>
+        <div class="menu-sep"></div>
+        <div>产品组装管理</div>
+		<div>新增产品组装</div>
+	 </div>     <div id="m财务管理" style="width:150px;">
+		<div>供应商预付款管理</div>
+		<div>供应商付款管理</div>
+        <div>供应商往来账务</div>
+		<div>供应商对账单</div>
+		<div class="menu-sep"></div>
+        <div>客户预收款管理</div>
+		<div>客户收款管理</div>
+        <div>客户往来账务</div>
+		<div>客户对账单</div>
+		<div class="menu-sep"></div>
+        <div>支出管理</div>
+		<div>收入管理</div>
+	    <div class="menu-sep"></div>
+        <div>预付款汇总</div>
+		<div>应收款汇总</div>
+        <div class="menu-sep"></div>
+        <div>银行存取款</div>
+		<div>银行转账</div>
+      	<div>银行账务</div>
+	</div>     <div id="m统计报表" style="width:150px;">
+		<div>申购报表</div>
+		<div>供应商报价报表</div>
+        <div>采购订单报表</div>
+		<div>采购入库报表</div>
+        <div>采购退货报表</div>
+		<div>外发加工订单报表</div>
+		<div class="menu-sep"></div>
+        <div>客户报价报表</div>
+		<div>客户订单报表</div>
+        <div>销售出库报表</div>
+		<div>客户退货报表</div>
+        <div>销售业绩报表</div>
+	    <div class="menu-sep"></div>
+        <div>功能导航</div>
+	</div>     <div id="m系统管理" style="width:150px;">
+		<div>操作员设置</div>
+		<div>更改密码</div>
+        <div>数据备份</div>
+		<div class="menu-sep"></div>
+        <div>打印模板设计</div>
+		<div>系统设置</div>
+        <div>系统初始化</div>
+		<div>系统日志</div>
+		<div class="menu-sep"></div>
+        <div>软件购买</div>
+		<div>在线升级</div>
+        <div>使用帮助</div>
+        <div>官方网站</div>
+        <div>关于本软件</div>
+        <div>锁定系统</div>
+        <div>退出</div>
+	</div>
+    @*=上菜单设计######################################################################################*@
+
+
+      @*=主界面标题*@
+	<div style="background:url('http://localhost:2562/Content/图片/主界面标题.png'); width:950px;height:70px;">
+    </div>
+  
+    @*=标题图片下面整个操作界面########################################################################*@
+	<div class="easyui-layout" style="width:950px;height:500px;">
+    
+     @*==左边菜单###############*@
+		<div data-options="region:'west',split:true" title="隐藏菜单" style="width:150px;">
+
+			<div class="easyui-accordion" data-options="fit:true,border:false,">@*===系统提醒菜单*@
+                <div title="系统提醒" style="padding:10px;">
+               
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',plain:true,iconCls:'icon-采购模块'"style="width:95%;">采购模块</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',plain:true,iconCls:'icon-账款'"style="width:95%;">账款</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',plain:true,iconCls:'icon-库存'"style="width:95%;">库存</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',plain:true,iconCls:'icon-业务模块'"style="width:95%;">业务模块</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',plain:true,iconCls:'icon-采购模块'"style="width:95%;">采购模块</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',plain:true,iconCls:'icon-外发模块'"style="width:95%;">外发模块</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1',plain:true,iconCls:'icon-外发模块'"style="width:95%;">生产模块</a>
+                </div>
+                <div title="基础数据" data-options="selected:true" style="padding:10px;">@*===基础数据*@
+					 
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-产品类别'"style="width:95%;">产品类别</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-仓库设置'"style="width:95%;">仓库设置</a>
+                <a href="#" class="easyui-linkbutton" onclick="$('#w产品资料').window('open')" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-产品资料'"style="width:95%;">产品资料</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-供应商'"style="width:95%;">供应商</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-客户资料'"style="width:95%;">客户资料</a>
+                <a href="#" class="easyui-linkbutton"data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-员工设置'"style="width:95%;">员工设置</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-银行账户'"style="width:95%;">银行账户</a>
+                <a href="#" class="easyui-linkbutton"  data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-数据导入'"style="width:95%;">数据导入</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-产品BOM'"style="width:95%;">产品BOM</a>
+                </div>
+                <div title="采购管理" style="padding:10px">@*===采购管理*@
+					 
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">内部申购</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">供应商报价</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">采购订单</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">外发订单</a>
+                 
+                </div>
+                <div title="业务管理" style="padding:10px">@*===业务管理*@
+
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">客户跟进</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">客户报价</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">客户订单</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">生产计划</a>
+                 
+                </div>
+                <div title="入库管理" style="padding:10px">@*===入库管理*@
+					
+                    
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-当前库存'"style="width:95%;">当前库存</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购入库'"style="width:95%;">采购入库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">外发入库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-生产入库'"style="width:95%;">生产入库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">其他入库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购退货'"style="width:95%;">采购退货</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">生产退料</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发退料'"style="width:95%;">外发退料</a>
+			   	  
+                </div>
+                <div title="出库管理" style="padding:10px">@*===出库管理*@
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-当前库存'"style="width:95%;">当前库存</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购入库'"style="width:95%;">销售出库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">生产领料</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-生产入库'"style="width:95%;">外发领料</a>       
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">其他出库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购退货'"style="width:95%;">采购退货</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">销售收款</a>
+                </div>
+                <div title="库存管理" style="padding:10px">@*===库存管理*@
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-当前库存'"style="width:95%;">当前库存</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购入库'"style="width:95%;">产品拆分</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">库存报损</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-生产入库'"style="width:95%;">库存报溢</a>
+                
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">库存调拨</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购退货'"style="width:95%;">产品流向</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发入库'"style="width:95%;">库存盘点</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-外发退料'"style="width:95%;">产品组装</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购退货'"style="width:95%;">库存调整</a>
+				
+                </div>
+                <div title="财务管理" style="padding:10px">@*===财务管理*@
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-财务管理'"style="width:95%;">应收款汇总</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">应付款汇总</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-财务管理'"style="width:95%;">银行账务</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">收入</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-财务管理'"style="width:95%;">现金银行</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">支出</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-财务管理'"style="width:95%;">销售付款</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">存取款</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-财务管理'"style="width:95%;">采购付款</a>
+				
+                </div>
+                <div title="统计报表" style="padding:10px">@*===统计报表*@
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">采购订单</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">客户订单</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">采购入库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">销售出库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">生产领料</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">生产入库</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">采购退货</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-采购'"style="width:95%;">销售退货</a>
+				
+                </div>
+                <div title="系统管理" style="padding:10px">@*===系统管理*@
+
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-系统设置'"style="width:95%;">操作员</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">更改密码</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-系统设置'"style="width:95%;">数据备份</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">打印设计</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-系统设置'"style="width:95%;">系统设置</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">初始化</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-系统设置'"style="width:95%;">系统日志</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-报表'"style="width:95%;">在线升级</a>
+                <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,iconCls:'icon-系统设置'"style="width:95%;">官方网站</a>
+				
+                </div>
+
+			</div>
+		</div>
+        @*==中间数据区域###############*@
+		<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+			<div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+				<div title="About" data-options="href:'../../Content/themes/jquery-easyui-1.3.3/demo/layout/_content.html'" style="padding:10px"></div>
+				<div title="DataGrid" style="padding:5px">
+					<table class="easyui-datagrid"data-options="url:'../../Content/themes/jquery-easyui-1.3.3/demo/layout/datagrid_data1.json',singleSelect:true,fit:true,fitColumns:true">
+						<thead>
+							<tr>
+								<th data-options="field:'itemid'" width="80">Item ID</th>
+								<th data-options="field:'productid'" width="100">Product ID</th>
+								<th data-options="field:'listprice',align:'right'" width="80">List Price</th>
+								<th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
+								<th data-options="field:'attr1'" width="150">Attribute</th>
+								<th data-options="field:'status',align:'center'" width="50">Status</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+     @*=标题图片下面整个操作界面########################################################################*@
+
+      @*=弹出的产品资料窗体#########################3*@    <div id="w产品资料" class="easyui-window" title="产品资料" data-options="modal:true,closed:true,iconCls:'icon-产品资料'" style="width:800px;height:500px;padding:10px;">
+		<table>
+            <tr>
+              <td>请输入编号\拼音码\规格\条码\名称查询：</td>
+               <td><input <input class="submit" style="width:200px"></input></td>
+               <td>
+               <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-查询'">查询</a>
+               <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">添加</a>
+               <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-修改'">修改</a>
+               <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删除</a>               </td>             
+            </tr>
+        </table>
+         <table>
+               <tr>
+                 <td>
+                 <ul class="easyui-tree"style="width:150px;height:400px">
+		        <li>
+			        <span>My Documents</span>
+			        <ul>
+				        <li data-options="state:'closed'">
+					        <span>Photos</span>
+					        <ul>
+						        <li>
+							        <span>Friend</span>
+						        </li>
+						        <li>
+							        <span>Wife</span>
+						        </li>
+						        <li>
+							        <span>Company</span>
+						        </li>
+					        </ul>
+				        </li>
+				        <li>
+					        <span>Program Files</span>
+					        <ul>
+						        <li>Intel</li>
+						        <li>Java</li>
+						        <li>Microsoft Office</li>
+						        <li>Games</li>
+					        </ul>
+				        </li>
+				        <li>index.html</li>
+				        <li>about.html</li>
+				        <li>welcome.html</li>
+			        </ul>
+		        </li>
+	        </ul>
+                 </td>
+       
+       
+               <td>
+       
+     
+     
+             <table class="easyui-datagrid" title="产品资料" style="width:600px;height:400px"
+			        data-options="singleSelect:true,collapsible:true,url:'../datagrid/datagrid_data1.json'">
+		        <thead>
+			        <tr>
+				        <th data-options="field:'itemid',width:80">Item ID</th>
+				        <th data-options="field:'productid',width:100">Product</th>
+				        <th data-options="field:'listprice',width:80,align:'right'">List Price</th>
+				        <th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+				        <th data-options="field:'attr1',width:250">Attribute</th>
+				        <th data-options="field:'status',width:60,align:'center'">Status</th>                
+				        <th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+				        <th data-options="field:'attr1',width:250">Attribute</th>
+				        <th data-options="field:'status',width:60,align:'center'">Status</th>
+			        </tr>
+		        </thead>
+	
+			        <tr>
+				        <td>EST-1</td><td>FI-SW-01</td><td>36.50</td><td>Large</td>
+			        </tr>
+			        <tr>
+				        <td>EST-10</td><td>K9-DL-01</td><td>18.50</td><td>Spotted Adult Female</td>
+			        </tr>
+			        <tr>
+				        <td>EST-11</td><td>RP-SN-01</td><td>28.50</td><td>Venomless</td>
+			        </tr>
+			        <tr>
+				        <td>EST-12</td><td>RP-SN-01</td><td>26.50</td><td>Rattleless</td>
+			        </tr>
+			        <tr>
+				        <td>EST-13</td><td>RP-LI-02</td><td>35.50</td><td>Green Adult</td>
+			        </tr>
+	       </table>
+               </td>
+
+               </tr>
+       
+                  </table>
+
+	</div>    @*=弹出的产品资料窗体#########################3*@
+</body>
+</html>

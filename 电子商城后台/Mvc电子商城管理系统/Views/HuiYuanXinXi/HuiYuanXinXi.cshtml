@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html><head>
+
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+    <script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+   </head>
+   <script type="text/javascript">
+
+       var BangDing = 0; //判断是否完绑定数据
+       $(document).ready(function () {
+           //           start();
+           //显示窗体
+           $('#w会员信息').window('open');
+           $.getJSON("/HuiYuanXinXi/ChaXunQuanBuHuiYuanXinXi",
+                                function (data) {
+                                    $('#tb会员信息').datagrid('loadData', data);
+                                    BangDing++;
+                                }
+          );
+           //           //树形控件的绑定
+           //           //                                $('#treHuiYuanXinXi').tree({ url: '/ChanPinZiLiao/ChaXunWuLiaoLeiXing' });
+           //           $.getJSON("/ChanPinZiLiao/ChaXunWuLiaoLeiXing",
+           //              function (data) {
+           //                  $('#treHuiYuanXinXi').tree("loadData", data);
+           //                  BangDing++;
+           //              }
+           //            );
+       });
+       //模糊查询商品信息，然后绑定到datagrid
+       function getHuiYuanXinXi() {
+           if ($("#txtNeiRong").val() == "") {
+               alert("请输入查询内容");
+           }
+           else {
+               $.getJSON("/HuiYuanXinXi/MoHuChaXun?strMoHu=" + $("#txtNeiRong").val(),
+                function (data) {
+                    $('#tb会员信息').datagrid('loadData', data);
+                });
+           }
+       }
+
+       //点击某节点，查询该节点的商品信息
+       function HuiYuanXinXiChaXun() {
+           var node = $('#treHuiYuanXinXi').tree('getSelected');
+           if (node) {
+               var WuLiaoLeiXingID = node.id;
+
+               $.getJSON("/ChanPinZiLiao/LeiBieChaXunXinXi?WuliaoLeiXingID=" + WuLiaoLeiXingID,
+                function (data) {
+                    $('#tb会员信息').datagrid('loadData', data);
+                });
+           }
+       }
+       //点击商品，删除商品信息
+       function HuiYuanXinXiShanChu() {
+
+           if (confirm('是否删除？')) {
+               var row = $('#tb会员信息').datagrid('getSelected');
+               if (row) {
+
+                   $.getJSON("/HuiYuanXinXi/DeleteHuiYuanXinXi?会员信息ID=" + row.会员ID,
+                function (data) {
+                    if (data != null) {
+                        alert("删除成功");
+                        $.getJSON("/HuiYuanXinXi/ChaXunQuanBuHuiYuanXinXi",
+                                function (data) {
+                                    $('#tb会员信息').datagrid('loadData', data);
+
+                                }
+            );
+                    }
+                });
+               }
+               else {
+                   alert("请选择需要删除的商品");
+
+               }
+           }
+           else
+               return false;
+
+       }
+       //点击商品，添加商品类别信息
+       function HuiYuanXinXiTianJiai() {
+       
+      
+               window.location.href = "/HuiYuanXinXi/InsertHuiYuanXinXi";
+        
+
+
+       }
+
+       //点击商品，修改商品类别信息
+       function HuiYuanXinXiXiuGai() {
+           var row = $('#tb会员信息').datagrid('getSelected');
+           if (row) {
+               window.location.href = "/HuiYuanXinXi/UpdateHuiYuanXinXi?会员信息ID=" + row.会员ID;
+           }
+           else {
+               alert("请选择需要修改的会员");
+
+           }
+
+
+       }
+
+
+
+       function start() {
+
+           $('#wstart').window('open');
+           var value = $('#p').progressbar('getValue');
+           if (value < 100) {
+
+               value = BangDing * 50;
+               $('#p').progressbar('setValue', value);
+               setTimeout(arguments.callee, 200);
+           }
+           else {
+               $('#p').progressbar('setValue', 0);
+
+               $('#wstart').window('close');
+               BangDing = 0;
+           }
+       }</script>
+<body> @*进度条*@   <div id="wstart" class="easyui-window" title="数据加载中"  data-options="modal:true,iconCls:'icon-产品资料'" style="width:440px;height:100px;padding:10px;  top: 150px; left:300px;">
+
+        <div id="p"   class="easyui-progressbar" style="width:400px;"></div>   </div>   @*=弹出的产品资料窗体#########################3*@     <div id="w会员信息" class="easyui-window" title="会员信息"  data-options="modal:true, maximized:true,iconCls:'icon-产品资料'" style="width:1010px;height:435px;padding:10px;  top: 1px; left: 1px;">
+		<table>
+            <tr> 
+              <td>请输入用户名\昵称查询：</td>
+               <td><input id="txtNeiRong" class="submit" style="width:200px"></input></td>
+               <td>
+               <a onclick="getHuiYuanXinXi()" class="easyui-linkbutton" data-options="iconCls:'icon-查询'" >查询</a>
+              @* <a onclick="HuiYuanXinXiTianJiai()" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">添加</a>*@
+               <a  onclick="HuiYuanXinXiXiuGai()" class="easyui-linkbutton" data-options="iconCls:'icon-修改'">修改</a>
+               @*<a onclick="HuiYuanXinXiShanChu()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">删除</a>*@               </td>
+            </tr>
+        </table>
+         <table>
+               <tr>
+              
+               <td>
+             <table id="tb会员信息" class="easyui-datagrid" title="会员信息" style="width:940px;height:340px"              data-options="singleSelect:true">
+		        <thead>
+			        <tr>
+                        <th data-options="field:'会员ID',width:120,hidden:'true', align:'center'">会员ID</th>
+                        <th data-options="field:'昵称',width:120,align:'center'">学号</th>
+                        <th data-options="field:'会员用户名',width:120, align:'center'">用户名</th>                        <th data-options="field:'会员等级PubID', hidden:'true', width:120,align:'center'">会员等级PubID</th>                        <th data-options="field:'会员状态PubID',hidden:'true', width:120,align:'center'">会员状态PubID</th>
+                        <th data-options="field:'会员等级',width:120,hidden:'true',align:'center'">会员等级</th>
+                        <th data-options="field:'联系电话',width:120,align:'center'">联系电话</th>
+                        <th data-options="field:'邮箱',width:320,align:'center'">邮箱</th>
+                        <th data-options="field:'性别',width:120, align:'center'">性别</th>                        
+                   
+			        </tr>
+		        </thead>
+	       </table>
+               </td>
+               </tr>
+                  </table>
+	</div>    @*=弹出的产品资料窗体#########################3*@    
+</body>
+</html>

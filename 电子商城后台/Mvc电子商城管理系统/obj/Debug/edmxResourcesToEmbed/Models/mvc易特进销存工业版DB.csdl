@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="易特进销存工业版Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="易特进销存工业版Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="易特进销存工业版Model.sysdiagrams" />
+    <EntitySet Name="采购订单表" EntityType="易特进销存工业版Model.采购订单表" />
+    <EntitySet Name="采购明细表" EntityType="易特进销存工业版Model.采购明细表" />
+    <EntitySet Name="仓库表" EntityType="易特进销存工业版Model.仓库表" />
+    <EntitySet Name="出入单据表" EntityType="易特进销存工业版Model.出入单据表" />
+    <EntitySet Name="出入库类型表" EntityType="易特进销存工业版Model.出入库类型表" />
+    <EntitySet Name="出入库明细表" EntityType="易特进销存工业版Model.出入库明细表" />
+    <EntitySet Name="订单类型表" EntityType="易特进销存工业版Model.订单类型表" />
+    <EntitySet Name="供货商表" EntityType="易特进销存工业版Model.供货商表" />
+    <EntitySet Name="交易银行账户表" EntityType="易特进销存工业版Model.交易银行账户表" />
+    <EntitySet Name="客户表" EntityType="易特进销存工业版Model.客户表" />
+    <EntitySet Name="库存表" EntityType="易特进销存工业版Model.库存表" />
+    <EntitySet Name="生产商表" EntityType="易特进销存工业版Model.生产商表" />
+    <EntitySet Name="物料表" EntityType="易特进销存工业版Model.物料表" />
+    <EntitySet Name="物料价格标" EntityType="易特进销存工业版Model.物料价格标" />
+    <EntitySet Name="员工表" EntityType="易特进销存工业版Model.员工表" />
+    <EntitySet Name="属性集合表" EntityType="易特进销存工业版Model.属性集合表" />
+    <EntitySet Name="属性明细表" EntityType="易特进销存工业版Model.属性明细表" />
+  </EntityContainer>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="采购订单表">
+    <Key>
+      <PropertyRef Name="采购订单ID" />
+    </Key>
+    <Property Name="采购订单ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="订单类型ID" Type="Int32" />
+    <Property Name="采购订单编码" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="供货商ID" Type="Int32" Nullable="false" />
+    <Property Name="审核员工ID" Type="Int32" Nullable="false" />
+    <Property Name="经手员工ID" Type="Int32" Nullable="false" />
+    <Property Name="付款方式PubID" Type="Int32" />
+    <Property Name="原始单号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="生产单号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="下单时间" Type="DateTime" />
+    <Property Name="交货日期" Type="DateTime" />
+    <Property Name="预付金额" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="应付金额" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="申购部门PubID" Type="Int32" />
+    <Property Name="采购类别PubID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="采购明细表">
+    <Key>
+      <PropertyRef Name="采购明细ID" />
+    </Key>
+    <Property Name="采购明细ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="采购订单ID" Type="Int32" Nullable="false" />
+    <Property Name="物料ID" Type="Int32" Nullable="false" />
+    <Property Name="属性明细PubID" Type="Int32" />
+    <Property Name="数量" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="单价" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="税率" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="备注" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="仓库表">
+    <Key>
+      <PropertyRef Name="仓库ID" />
+    </Key>
+    <Property Name="仓库ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="仓库名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="负责人" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="联系方式" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="地址" Type="String" MaxLength="100" Unicode="false" FixedLength="true" />
+    <Property Name="备注" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="默认否" Type="Boolean" />
+    <Property Name="有效否" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="出入单据表">
+    <Key>
+      <PropertyRef Name="出入票据ID" />
+    </Key>
+    <Property Name="出入票据ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="出入票据编码" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+    <Property Name="供货商ID" Type="Int32" />
+    <Property Name="采购订单ID" Type="Int32" />
+    <Property Name="生产单号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="送货单号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="运费" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="优惠价格" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="付款方式ID" Type="Int32" />
+    <Property Name="开发票否" Type="Boolean" />
+    <Property Name="发票编号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="发票票据编码" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="出入库员工ID" Type="Int32" />
+    <Property Name="审核员工ID" Type="Int32" />
+    <Property Name="审核否" Type="Boolean" />
+    <Property Name="出入时间" Type="DateTime" />
+    <Property Name="出入库类型ID" Type="Int32" />
+    <Property Name="备注" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="出入库类型表">
+    <Key>
+      <PropertyRef Name="出入库类型ID" />
+    </Key>
+    <Property Name="出入库类型ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="出入库类型名称" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="出入库类型简称" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="入库否" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="出入库明细表">
+    <Key>
+      <PropertyRef Name="出入库ID" />
+    </Key>
+    <Property Name="出入库ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="物料ID" Type="Int32" Nullable="false" />
+    <Property Name="入库否" Type="Boolean" />
+    <Property Name="出入票据ID" Type="Int32" Nullable="false" />
+    <Property Name="采购订单ID" Type="Int32" />
+    <Property Name="出入库数量" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="税率_" Type="Decimal" Precision="6" Scale="3" />
+    <Property Name="基重" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="备注" Type="String" MaxLength="30" Unicode="true" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="订单类型表">
+    <Key>
+      <PropertyRef Name="订单类型ID" />
+    </Key>
+    <Property Name="订单类型ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="订单类型名称" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="订单类型简称" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="供货商表">
+    <Key>
+      <PropertyRef Name="供货商ID" />
+    </Key>
+    <Property Name="供货商ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="供应商类型PubID" Type="Int32" Nullable="false" />
+    <Property Name="供应商结算方式PubID" Type="Int32" Nullable="false" />
+    <Property Name="区域IDPubID" Type="Int32" Nullable="false" />
+    <Property Name="供货商编码" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="供货商名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="助记码" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="公司名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="联系人" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="联系电话" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="联系地址" Type="String" MaxLength="50" Unicode="false" FixedLength="true" />
+    <Property Name="期初应付" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="传真" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+    <Property Name="邮箱" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="主页" Type="String" MaxLength="50" Unicode="false" FixedLength="true" />
+    <Property Name="税号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="税率" Type="Double" />
+    <Property Name="备注" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="默认否" Type="Boolean" />
+    <Property Name="有效否" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="交易银行账户表">
+    <Key>
+      <PropertyRef Name="交易银行账户ID" />
+    </Key>
+    <Property Name="交易银行账户ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="供货商ID" Type="Int32" Nullable="false" />
+    <Property Name="客户ID" Type="Int32" Nullable="false" />
+    <Property Name="交易商银行账户名称" Type="String" MaxLength="30" Unicode="false" FixedLength="true" />
+    <Property Name="账号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="客户表">
+    <Key>
+      <PropertyRef Name="客户ID" />
+    </Key>
+    <Property Name="客户ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="客户等级PubID" Type="Int32" Nullable="false" />
+    <Property Name="价格等级PubID" Type="Int32" Nullable="false" />
+    <Property Name="客户状态PubID" Type="Int32" Nullable="false" />
+    <Property Name="客户阶段PubID" Type="Int32" Nullable="false" />
+    <Property Name="区域PubID" Type="Int32" Nullable="false" />
+    <Property Name="客户类别PubID" Type="Int32" Nullable="false" />
+    <Property Name="负责业务PubID" Type="Int32" Nullable="false" />
+    <Property Name="客户来源PubID" Type="Int32" Nullable="false" />
+    <Property Name="行业类别PubID" Type="Int32" Nullable="false" />
+    <Property Name="交易类型PubID" Type="Int32" Nullable="false" />
+    <Property Name="街道地址" Type="String" MaxLength="100" Unicode="false" FixedLength="true" />
+    <Property Name="邮编" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="客户编码" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="客户名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="公司全称" Type="String" MaxLength="30" Unicode="false" FixedLength="true" />
+    <Property Name="主联系人" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="联系电话" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="QQ" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+    <Property Name="淘宝旺旺" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="阿里旺旺" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="MSN" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="skype" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="办公电话" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="邮箱" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="税号" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="税率" Type="Double" />
+    <Property Name="助记码" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="库存表">
+    <Key>
+      <PropertyRef Name="库存ID" />
+    </Key>
+    <Property Name="库存ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="物料价格ID" Type="Int32" Nullable="false" />
+    <Property Name="仓库ID" Type="Int32" Nullable="false" />
+    <Property Name="库存数" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="库存上限" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="库存下限" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="生产商表">
+    <Key>
+      <PropertyRef Name="生产商ID" />
+    </Key>
+    <Property Name="生产商ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="生产商名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="联系人" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="联系电话" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="地址" Type="String" MaxLength="50" Unicode="false" FixedLength="true" />
+    <Property Name="主页" Type="String" MaxLength="50" Unicode="false" FixedLength="true" />
+    <Property Name="QQ" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+    <Property Name="邮箱" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="物料表">
+    <Key>
+      <PropertyRef Name="物料ID" />
+    </Key>
+    <Property Name="物料ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="物料编码" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="助记码" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="物料名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="规格" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="默认仓库ID" Type="Int32" Nullable="false" />
+    <Property Name="默认储位" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="生产商ID" Type="Int32" Nullable="false" />
+    <Property Name="颜色PubID" Type="Int32" Nullable="false" />
+    <Property Name="计量单位PubID" Type="Int32" Nullable="false" />
+    <Property Name="物料类别PubID" Type="Int32" Nullable="false" />
+    <Property Name="数量" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="条形码" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="有效否" Type="Boolean" />
+    <Property Name="基本重量" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="限售建议价格" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="预设进价" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="VIP价格" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="会员价格" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="备注" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="成本价格" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="打折否" Type="Boolean" />
+    <Property Name="选择" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="物料价格标">
+    <Key>
+      <PropertyRef Name="物料价格ID" />
+    </Key>
+    <Property Name="物料价格ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="物料ID" Type="Int32" Nullable="false" />
+    <Property Name="入库价格" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="员工表">
+    <Key>
+      <PropertyRef Name="员工ID" />
+    </Key>
+    <Property Name="员工ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="部门PubID" Type="Int32" Nullable="false" />
+    <Property Name="姓名" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="属性集合表">
+    <Key>
+      <PropertyRef Name="属性集合Id" />
+    </Key>
+    <Property Name="属性集合Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="属性集合名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="属性明细表">
+    <Key>
+      <PropertyRef Name="属性明细PubID" />
+    </Key>
+    <Property Name="属性明细PubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="属性集合ID" Type="Int32" Nullable="false" />
+    <Property Name="属性明细PubID_Far" Type="Int32" Nullable="false" />
+    <Property Name="属性明细名称" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <Property Name="有效否" Type="Boolean" />
+  </EntityType>
+</Schema>

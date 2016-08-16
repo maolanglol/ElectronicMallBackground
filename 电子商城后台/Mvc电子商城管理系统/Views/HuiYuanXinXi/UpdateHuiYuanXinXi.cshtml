@@ -1,0 +1,171 @@
+﻿ <!DOCTYPE html>
+<html><head>
+<meta content="text/javascript;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/default/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="../../Content/themes/jquery-easyui-1.3.3/demo/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Content/进销存样式.css"/>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../../Content/themes/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+    </head>
+     <script type="text/javascript">
+         $(document).ready(function () {
+             //            $('#txtFuJiID').attr('value', @Session["HuiYuanXinXiID"]);
+             cboHuiYuanDengJiBindingdata();
+             cboHuiYuanZhuangTaiiBindingdata();
+              BindingHuiYuanXinXi();
+             $('#w会员信息').window({//窗口初始化 
+                 //重要的部分 
+                 onBeforeClose: function () {
+                     //当面板关闭之前触发的事件 
+                     var GuanBi = ShiFouGuanBi();
+                     if (GuanBi != true)
+                         return false;
+                 }
+
+             });
+             $('#w会员信息').window('open');
+            
+            
+         });
+         //判断是否关闭窗体
+
+         function ShiFouGuanBi() {
+             if (confirm('窗口正在关闭，请确认您当前的操作已保存。\n 是否继续关闭窗口？')) {
+                 $('#w会员信息').window('close', true); //这里调用close 方法，true 表示面板被关闭的时候忽略onBeforeClose 回调函数。 
+                 window.location.href = "/HuiYuanXinXi/HuiYuanXinXi";
+             } else
+                 return false;
+         }
+         //下拉框属性数据绑定
+         function cboHuiYuanDengJiBindingdata() {
+
+             $.getJSON("/HuiYuanXinXi/ChaXunHuiYuanDengJi",
+              function (data) {
+                  $('#cboHuiYuanDengJi').combobox({ data: data, valueField: '会员等级ID',
+                      textField: '会员等级'
+                  });
+
+              });
+         }
+         //下拉框属性数据绑定
+         function cboHuiYuanZhuangTaiiBindingdata() {
+
+             $.getJSON("/HuiYuanXinXi/ChaXunHuiYuanZhuangTai",
+              function (data) {
+                  $('#cboHuiYuanZhuangTai').combobox({ data: data, valueField: '会员状态ID',
+                      textField: '会员状态'
+                  });
+
+              });
+
+
+
+          }
+
+
+          
+        function BindingHuiYuanXinXi() {
+//             setTimeout(function () {   
+                                $.getJSON("/HuiYuanXinXi/ChanXunHuiYuanXinXi?会员信息ID="+ @Session["会员信息ID"],
+                                              function (data) {
+                                                $('#cboHuiYuanDengJi').combobox('setValue', data[0].会员等级PubID);
+                                                                $('#cboHuiYuanZhuangTai').combobox('setValue', data[0].会员状态PubID);
+                                                              
+                                                                $('#txtYongHuMing').attr('value', data[0].会员用户名);
+                                                                $('#txtMiMa').attr('value', data[0].会员密码);
+                                                                $('#txtNiCheng').attr('value', data[0].昵称);
+                                                                $('#txtYouXiang').attr('value', data[0].邮箱);
+                                                                $('#txtXingBie').attr('value', data[0].性别);
+                                                                $('#txtQQHaoMa').attr('value', data[0].QQ);
+                                                                $('#txtDianHua').attr('value', data[0].办公电话);
+                                                                $('#txtShouJi').attr('value', data[0].联系电话);
+                                                                $('#txtLianXiDiZhi').attr('value', data[0].联系地址);
+                                                              
+                                                    BangDing++;
+                                              }
+                                   );
+//                  }, 2000);    
+         }
+
+         function XiuGaiHuiYuanXinXi() {
+             if (confirm('是否添加？')) {
+                 var dazhe = true;
+                 var n = $("input:checked").length;
+                 if (n == 0) {
+                     dazhe = false;
+                 }
+                 $.getJSON("/HuiYuanXinXi/XiuGaiHuiYuanXinXi?strHuiYuanDengJiID=" + $('#cboHuiYuanDengJi').combobox('getValue') + "&"
+                                        + "strHuiYuanZhuangTaiID=" + $('#cboHuiYuanZhuangTai').combobox('getValue') + "&"
+                                        + "strYongHuMing=" + $('#txtYongHuMing').val() + "&"
+                                        + "strMiMa=" + $('#txtMiMa').val() + "&"
+                                        + "strNiCheng=" + $('#txtNiCheng').val() + "&"
+                                        + "strYouXiang=" + $('#txtYouXiang').val() + "&"
+                                        + "strXingBie=" + $('#txtXingBie').val() + "&"
+                                        + "strQQ=" + $('#txtQQHaoMa').val() + "&"
+                                        + "strBanGongDianHua=" + $('#txtDianHua').val() + "&"
+                                        + "strShouJi=" + $('#txtShouJi').val() + "&"
+                                        + "strLianXiDiZhi=" + $('#txtLianXiDiZhi').val() + "&",
+
+                function (data) {
+                    if (data != null) {
+                        alert("修改成功");
+                        window.location.href = "/HuiYuanXinXi/HuiYuanXinXi";
+                    }
+                    else {
+                        alert("修改失败");
+                    }
+
+                });
+             }
+         }
+       </script>
+<body>
+  <div id="w会员信息" class="easyui-window" title="修改个人信息"  data-options="modal:true,closed:true,iconCls:'icon-产品资料'" style="width:480px;height:380px;padding:10px;  top: 30px; left:300px;">
+	<table>
+    <tr>
+     @*<td align="right">会员等级：</td><td><input id="cboHuiYuanDengJi" class="easyui-combobox" name="state" style="width:135px;"></input></td>
+    <td align="right">会员状态： </td><td><input id="cboHuiYuanZhuangTai" class="easyui-combobox" name="state" style="width:135px;"></input>*@
+    </tr>
+ 
+                    <tr> 
+                       <td align="right">用户名：</td><td> <input id="txtYongHuMing"   style="width:130px"></input></td>
+                       <td align="right">密码：</td><td> <input id="txtMiMa"   style="width:130px"></input></td>
+                    </tr>
+                    <tr>
+                      <td align="right">邮箱：</td><td colspan=3><input id="txtYouXiang" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                      <td align="right">昵称：</td><td colspan=3><input id="txtNiCheng" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                       <td align="right">电话：</td><td colspan=3> <input id="txtDianHua" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                      <td align="right">手机：</td><td colspan=3> <input id="txtShouJi" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                        <td align="right">QQ号码：</td><td colspan=3> <input id="txtQQHaoMa" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+                      <td align="right">联系地址：</td><td colspan=3> <input id="txtLianXiDiZhi" class="submit" style="width:335px"></input></td>
+                    </tr>
+                      <tr>
+                      <td align="right">性别：</td><td colspan=3> <input id="txtXingBie" class="submit" style="width:335px"></input></td>
+                    </tr>
+                    <tr>
+               <td style ="height : 50px" colspan=4 align="center">
+                
+               <a  id="btnTianJia" onclick="XiuGaiHuiYuanXinXi()" class="easyui-linkbutton" data-options="iconCls:'icon-添加'">修改</a>
+
+
+               <a onclick="ShiFouGuanBi()" class="easyui-linkbutton" data-options="iconCls:'icon-back'">退出</a>
+             
+             </td>
+            
+            </tr>
+
+        </table>
+  </div>
+    </body>
+    </html>
